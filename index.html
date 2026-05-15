@@ -5,95 +5,153 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Microsoft Netherlands</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
 :root {
   --blue: #0057FF;
-  --blue-pale: #EEF3FF;
-  --ink: #0A0A0A;
-  --ink-2: #444;
-  --ink-3: #888;
-  --ink-4: #C8C8C8;
-  --ink-5: #F2F2F2;
+  --blue-dim: #EEF3FF;
+  --ink: #0C0C0C;
+  --ink2: #3A3A3A;
+  --ink3: #7A7A7A;
+  --ink4: #C4C4C4;
+  --ink5: #EFEFEF;
   --white: #fff;
 }
-
 html, body {
-  width: 100%; height: 100%;
-  overflow: hidden;
-  background: var(--white);
-  font-family: 'Inter', sans-serif;
-  color: var(--ink);
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
+  width:100%; height:100%; overflow:hidden;
+  background:var(--white);
+  font-family:'Inter',sans-serif;
+  color:var(--ink);
+  -webkit-font-smoothing:antialiased;
 }
 
-#deck { position: fixed; inset: 0; }
-
+/* ── deck / slides ── */
+#deck { position:fixed; inset:0; }
 .slide {
-  position: absolute; inset: 0;
-  background: var(--white);
-  opacity: 0; pointer-events: none;
-  transition: opacity .5s cubic-bezier(.4,0,.2,1), transform .5s cubic-bezier(.4,0,.2,1);
-  transform: translateY(20px);
-  display: flex; flex-direction: column;
+  position:absolute; inset:0;
+  background:var(--white);
+  opacity:0; pointer-events:none;
+  transition:opacity .48s cubic-bezier(.4,0,.2,1), transform .48s cubic-bezier(.4,0,.2,1);
+  transform:translateY(18px);
+  display:flex; flex-direction:column;
+  overflow:hidden;
 }
-.slide.active { opacity: 1; pointer-events: all; transform: none; }
-.slide.exit { opacity: 0; transform: translateY(-20px); pointer-events: none; }
+.slide.active { opacity:1; pointer-events:all; transform:none; }
+.slide.exit   { opacity:0; transform:translateY(-18px); pointer-events:none; }
 
-/* progress */
-#bar { position: fixed; top: 0; left: 0; height: 2px; background: var(--blue); transition: width .4s ease; z-index: 99; }
+/* ── progress ── */
+#bar { position:fixed; top:0; left:0; height:2px; background:var(--blue); transition:width .4s ease; z-index:99; }
 
-/* nav */
-#nav { position: fixed; bottom: 28px; right: 32px; display: flex; align-items: center; gap: 10px; z-index: 99; }
+/* ── nav ── */
+#nav { position:fixed; bottom:28px; right:32px; display:flex; align-items:center; gap:10px; z-index:99; }
 .nb {
-  width: 36px; height: 36px; border-radius: 50%;
-  border: 1.5px solid var(--ink-4); background: var(--white);
-  color: var(--ink-3); font-size: 13px; cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
-  transition: all .18s;
+  width:36px; height:36px; border-radius:50%;
+  border:1.5px solid var(--ink4); background:var(--white);
+  color:var(--ink3); font-size:13px; cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  transition:all .18s;
 }
-.nb:hover { border-color: var(--blue); color: var(--blue); }
-#ctr { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--ink-3); letter-spacing: .08em; min-width: 44px; text-align: center; }
+.nb:hover { border-color:var(--blue); color:var(--blue); }
+#ctr { font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--ink3); letter-spacing:.08em; min-width:48px; text-align:center; }
 
-/* slide tag */
-.stag { position: absolute; top: 28px; right: 32px; font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--ink-4); letter-spacing: .12em; text-transform: uppercase; }
-
-/* anim */
-@keyframes up { from { opacity:0; transform:translateY(22px); } to { opacity:1; transform:none; } }
-.slide.active .a  { animation: up .6s ease both; }
+/* ── anim ── */
+@keyframes up { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:none} }
+.slide.active .a  { animation:up .58s ease both; }
 .slide.active .a2 { animation-delay:.07s; }
 .slide.active .a3 { animation-delay:.14s; }
 .slide.active .a4 { animation-delay:.21s; }
 .slide.active .a5 { animation-delay:.28s; }
 .slide.active .a6 { animation-delay:.35s; }
 
-/* ms logo */
-.logo { display:grid; grid-template-columns:1fr 1fr; gap:2.5px; width:18px; height:18px; }
+/* ── ms logo ── */
+.logo { display:grid; grid-template-columns:1fr 1fr; gap:2.5px; }
 .logo span { border-radius:1px; }
-.r{background:#F25022;} .g{background:#7FBA00;} .b{background:#00A4EF;} .y{background:#FFB900;}
+.lr{background:#F25022;} .lg{background:#7FBA00;} .lb{background:#00A4EF;} .ly{background:#FFB900;}
 
-/* ── common ── */
-.pad { padding: 52px 68px; flex: 1; display: flex; flex-direction: column; }
-.pad-xl { padding: 52px 80px; flex: 1; display: flex; flex-direction: column; }
-
-.eyebrow { font-size: 11px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--blue); margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
-.eyebrow::before { content:''; width:18px; height:1.5px; background:var(--blue); display:block; flex-shrink:0; }
-
-.rule { height: 1px; background: var(--ink-5); }
-.rule-v { width: 1px; background: var(--ink-4); }
-
-.chip { display:inline-flex; align-items:center; background:var(--ink-5); border-radius:4px; padding:4px 10px; font-size:11px; font-weight:500; color:var(--ink-2); letter-spacing:.02em; }
-.chip-b { background:var(--blue-pale); color:var(--blue); }
+/* ── utility ── */
+.blue  { color:var(--blue); }
+.muted { color:var(--ink3); }
+.mono  { font-family:'IBM Plex Mono',monospace; }
+.chip  { display:inline-flex; align-items:center; background:var(--ink5); border-radius:4px; padding:5px 12px; font-size:12px; font-weight:500; color:var(--ink2); }
+.chip-b { background:var(--blue-dim); color:var(--blue); }
 .chip-k { background:var(--ink); color:var(--white); }
+.rule { width:100%; height:1px; background:var(--ink5); }
 
-.mono { font-family:'IBM Plex Mono', monospace; }
-.blue { color: var(--blue); }
-.muted { color: var(--ink-3); }
+/* ── slide layout wrappers ── */
 
-.footnote { font-size: 11px; color: var(--ink-4); border-top: 1px solid var(--ink-5); padding-top: 12px; margin-top: auto; }
+/* Chapter (section break) slide — pure centered */
+.ch {
+  flex:1; display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  text-align:center; padding:60px 80px;
+  position:relative;
+}
+.ch-num {
+  font-size:clamp(180px,25vw,340px);
+  font-weight:900; line-height:1; letter-spacing:-.07em;
+  color:var(--ink5); position:absolute;
+  user-select:none; pointer-events:none;
+  bottom:-40px; right:40px;
+}
+
+/* Content slide — balanced padding */
+.ct { flex:1; display:flex; flex-direction:column; padding:52px 80px; }
+
+/* Eyebrow label */
+.eyebrow {
+  font-size:11px; font-weight:600; letter-spacing:.2em;
+  text-transform:uppercase; color:var(--blue);
+  margin-bottom:14px; display:flex; align-items:center; gap:8px;
+}
+.eyebrow::before { content:''; width:20px; height:1.5px; background:var(--blue); flex-shrink:0; }
+
+/* Content title */
+.ct-title {
+  font-size:clamp(36px,4.8vw,60px);
+  font-weight:800; line-height:1.0; letter-spacing:-.035em;
+}
+
+/* Body text — BIG for presentation */
+.body {
+  font-size:clamp(18px,2vw,24px);
+  line-height:1.72; color:var(--ink2); font-weight:400;
+}
+.body-lg {
+  font-size:clamp(20px,2.2vw,27px);
+  line-height:1.65; color:var(--ink2); font-weight:400;
+}
+
+/* Item label inside cards / sections */
+.item-title { font-size:clamp(17px,1.8vw,22px); font-weight:700; margin-bottom:8px; }
+.item-body  { font-size:clamp(15px,1.6vw,19px); line-height:1.65; color:var(--ink2); }
+
+/* Stat number */
+.stat-n {
+  font-size:clamp(52px,7vw,88px);
+  font-weight:800; line-height:1; letter-spacing:-.045em;
+  color:var(--blue);
+}
+.stat-l { font-size:clamp(13px,1.2vw,16px); color:var(--ink3); margin-top:6px; }
+
+/* Footnote */
+.fn { font-size:11px; color:var(--ink4); border-top:1px solid var(--ink5); padding-top:12px; margin-top:auto; padding-bottom:2px; }
+
+/* Slide tag (top right) */
+.stag { position:absolute; top:26px; right:32px; font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--ink4); letter-spacing:.12em; text-transform:uppercase; }
+
+/* Quote pull */
+.pull { border-left:2.5px solid var(--blue); padding:14px 22px; font-size:clamp(16px,1.7vw,20px); color:var(--ink2); line-height:1.7; font-style:italic; background:var(--blue-dim); border-radius:0 8px 8px 0; }
+
+/* ── layout helpers ── */
+.col2 { display:grid; grid-template-columns:1fr 1fr; gap:48px; }
+.col3 { display:grid; grid-template-columns:repeat(3,1fr); }
+.col2-narrow { display:grid; grid-template-columns:1fr 1.4fr; gap:56px; }
+.border-r { border-right:1px solid var(--ink5); }
+.sep { height:1px; background:var(--ink5); }
+.row-item { display:flex; gap:22px; align-items:flex-start; padding:22px 0; border-bottom:1px solid var(--ink5); }
+.row-item:last-child { border-bottom:none; }
+.row-num { font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--blue); font-weight:500; padding-top:4px; flex-shrink:0; width:26px; }
 </style>
 </head>
 <body>
@@ -101,531 +159,553 @@ html, body {
 <div id="bar"></div>
 <div id="deck">
 
-<!-- ══════════ 01 — COVER ══════════ -->
+<!-- ════════════════════════════════
+  01 — COVER
+════════════════════════════════ -->
 <div class="slide active" id="s1">
-  <div class="pad" style="justify-content:space-between;">
+  <div style="flex:1;display:flex;flex-direction:column;padding:52px 80px;">
 
+    <!-- top bar -->
     <div class="a" style="display:flex;align-items:center;justify-content:space-between;">
       <div style="display:flex;align-items:center;gap:10px;">
-        <div class="logo"><span class="r"></span><span class="g"></span><span class="b"></span><span class="y"></span></div>
-        <span style="font-size:12px;font-weight:600;letter-spacing:.03em;">Microsoft Netherlands</span>
+        <div class="logo" style="width:20px;height:20px;"><span class="lr"></span><span class="lg"></span><span class="lb"></span><span class="ly"></span></div>
+        <span style="font-size:13px;font-weight:600;letter-spacing:.03em;">Microsoft Netherlands</span>
       </div>
       <span class="chip mono">2026 Study Visit</span>
     </div>
 
-    <div style="padding:20px 0;">
-      <div class="a a2" style="font-size:clamp(62px,9.5vw,130px);font-weight:800;line-height:.92;letter-spacing:-.04em;color:var(--ink);">Microsoft</div>
-      <div class="a a3" style="font-size:clamp(62px,9.5vw,130px);font-weight:800;line-height:.92;letter-spacing:-.04em;color:var(--blue);">Netherlands</div>
-      <div class="a a4" style="margin-top:36px;max-width:460px;">
-        <p style="font-size:17px;line-height:1.7;color:var(--ink-2);font-weight:400;">유럽 클라우드 인프라의 심장부 —<br>36년의 혁신, 책임, 그리고 논쟁을 해부한다</p>
+    <!-- hero -->
+    <div style="flex:1;display:flex;flex-direction:column;justify-content:center;">
+      <div class="a a2" style="font-size:clamp(68px,10vw,140px);font-weight:800;line-height:.91;letter-spacing:-.045em;color:var(--ink);">Microsoft</div>
+      <div class="a a3" style="font-size:clamp(68px,10vw,140px);font-weight:800;line-height:.91;letter-spacing:-.045em;color:var(--blue);margin-bottom:36px;">Netherlands</div>
+      <div class="a a4" style="max-width:560px;">
+        <p class="body-lg">유럽 클라우드 인프라의 심장부 —<br>36년의 혁신, 책임, 그리고 논쟁을 해부한다</p>
       </div>
     </div>
 
-    <div class="a a5" style="display:flex;align-items:center;justify-content:space-between;padding-top:24px;border-top:1px solid var(--ink-5);">
+    <!-- bottom -->
+    <div class="a a5" style="display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--ink5);padding-top:22px;">
       <div style="display:flex;gap:8px;flex-wrap:wrap;">
         <span class="chip chip-b">☁️ Azure</span>
         <span class="chip chip-b">🤖 AI</span>
         <span class="chip chip-b">🌱 Sustainability</span>
         <span class="chip chip-b">🏢 Open Office</span>
       </div>
-      <span class="mono muted" style="font-size:11px;">16 slides</span>
+      <span class="mono muted" style="font-size:11px;">18 slides</span>
     </div>
-
   </div>
 </div>
 
-<!-- ══════════ 02 — 핵심 사업 ══════════ -->
+<!-- ════════════════════════════════
+  02 — 개요 (TOC)
+════════════════════════════════ -->
 <div class="slide" id="s2">
-  <div class="pad">
-    <span class="stag">01 / What is Microsoft</span>
-    <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:0;">
-      <div class="eyebrow a">마이크로소프트란</div>
-      <div class="a a2" style="font-size:clamp(38px,5.5vw,72px);font-weight:800;line-height:1.0;letter-spacing:-.035em;margin-bottom:10px;">
-        디지털 세상의<br><span class="blue">인프라 건설사</span>
-      </div>
-      <div class="a a3" style="font-size:16px;color:var(--ink-2);line-height:1.7;max-width:480px;margin-bottom:48px;">
-        도로·전기·수도 같은 인프라를 짓고, 그 위에서<br>쓸 수 있는 도구를 함께 만드는 회사
-      </div>
-
-      <div class="a a4" style="display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--ink-5);">
-        <div style="padding:28px 0 28px;border-right:1px solid var(--ink-5);">
-          <div style="font-size:26px;margin-bottom:14px;">🖥️</div>
-          <div style="font-weight:700;font-size:17px;margin-bottom:6px;">소프트웨어</div>
-          <div style="font-size:13px;color:var(--ink-3);line-height:1.55;margin-bottom:12px;">우리가 매일 쓰는 바로 그것</div>
-          <div style="display:flex;gap:5px;"><span class="chip">Windows</span><span class="chip">Office</span></div>
+  <div class="ct">
+    <span class="stag">Overview</span>
+    <div class="eyebrow a">오늘의 구성</div>
+    <div class="a a2 ct-title" style="margin-bottom:40px;">발표 개요</div>
+    <div class="a a3" style="display:grid;grid-template-columns:1fr 1fr;gap:0;flex:1;align-items:center;">
+      <div style="padding-right:48px;border-right:1px solid var(--ink5);display:flex;flex-direction:column;gap:0;">
+        <div class="row-item" style="padding:20px 0;">
+          <span class="row-num">01</span>
+          <div><div class="item-title">마이크로소프트란?</div><div class="item-body">핵심 사업 3가지 · AI 생태계</div></div>
         </div>
-        <div style="padding:28px 28px;border-right:1px solid var(--ink-5);">
-          <div style="font-size:26px;margin-bottom:14px;">☁️</div>
-          <div style="font-weight:700;font-size:17px;margin-bottom:6px;color:var(--blue);">클라우드</div>
-          <div style="font-size:13px;color:var(--ink-3);line-height:1.55;margin-bottom:12px;">기업들의 "디지털 창고"</div>
-          <div style="display:flex;gap:5px;"><span class="chip chip-b">Azure</span><span class="chip">Teams</span></div>
+        <div class="row-item" style="padding:20px 0;">
+          <span class="row-num">02</span>
+          <div><div class="item-title">네덜란드 법인</div><div class="item-body">36년 역사 · 스키폴 공항 전략</div></div>
         </div>
-        <div style="padding:28px 28px;">
-          <div style="font-size:26px;margin-bottom:14px;">🤖</div>
-          <div style="font-weight:700;font-size:17px;margin-bottom:6px;">AI</div>
-          <div style="font-size:13px;color:var(--ink-3);line-height:1.55;margin-bottom:12px;">OpenAI 최대 투자사</div>
-          <div style="display:flex;gap:5px;"><span class="chip">Copilot</span><span class="chip">ChatGPT</span></div>
+        <div class="row-item" style="padding:20px 0;">
+          <span class="row-num">03</span>
+          <div><div class="item-title">오피스 철학</div><div class="item-body">9,000㎡의 77%를 여는 이유</div></div>
+        </div>
+      </div>
+      <div style="padding-left:48px;display:flex;flex-direction:column;gap:0;">
+        <div class="row-item" style="padding:20px 0;">
+          <span class="row-num">04</span>
+          <div><div class="item-title">유럽의 클라우드 수도</div><div class="item-body">AMS-IX · 300MW · 건설 금지령</div></div>
+        </div>
+        <div class="row-item" style="padding:20px 0;">
+          <span class="row-num">05</span>
+          <div><div class="item-title">지속가능성</div><div class="item-body">2030 목표 · Circular Center</div></div>
+        </div>
+        <div class="row-item" style="padding:20px 0;">
+          <span class="row-num">06</span>
+          <div><div class="item-title">지역사회 & 현안</div><div class="item-body">교육 · 농업 AI · 디지털 주권</div></div>
         </div>
       </div>
     </div>
-    <div class="footnote a a5">출처: microsoft.com 공식 · AI Magazine (2025.10)</div>
   </div>
 </div>
 
-<!-- ══════════ 03 — OpenAI ══════════ -->
+<!-- ════════════════════════════════
+  03 — CHAPTER 01
+════════════════════════════════ -->
 <div class="slide" id="s3">
-  <div class="pad" style="justify-content:center;">
-    <span class="stag">02 / AI Ecosystem</span>
-    <div style="flex:1;display:flex;flex-direction:column;justify-content:center;">
-      <div class="eyebrow a">AI 생태계</div>
-      <div class="a a2" style="font-size:clamp(36px,5.2vw,68px);font-weight:800;line-height:1.0;letter-spacing:-.035em;margin-bottom:16px;">
-        당신이 쓰는 AI의 뒤에는<br><span class="blue">Microsoft</span>가 있다
-      </div>
-      <div class="a a3" style="font-size:16px;color:var(--ink-2);line-height:1.7;max-width:520px;margin-bottom:44px;">
-        우리가 매일 쓰는 ChatGPT·Copilot·GitHub Copilot —<br>대부분이 Microsoft 인프라 위에서 돌아간다
-      </div>
-
-      <div class="a a4" style="display:flex;align-items:center;gap:0;border:1.5px solid var(--ink-5);border-radius:14px;overflow:hidden;max-width:620px;">
-        <div style="flex:1;padding:28px 24px;text-align:center;">
-          <div style="font-size:32px;margin-bottom:8px;">🤖</div>
-          <div style="font-weight:700;font-size:16px;margin-bottom:3px;">OpenAI</div>
-          <div style="font-size:12px;color:var(--ink-3);">ChatGPT 개발사</div>
-        </div>
-        <div style="width:1px;height:80px;background:var(--ink-5);"></div>
-        <div style="flex:1;padding:28px 24px;text-align:center;background:var(--blue-pale);">
-          <div class="logo" style="width:24px;height:24px;margin:0 auto 8px;"><span class="r"></span><span class="g"></span><span class="b"></span><span class="y"></span></div>
-          <div style="font-weight:700;font-size:16px;margin-bottom:3px;color:var(--blue);">Microsoft</div>
-          <div style="font-size:12px;color:var(--blue);">최대 투자 + 인프라</div>
-        </div>
-        <div style="width:1px;height:80px;background:var(--ink-5);"></div>
-        <div style="flex:1;padding:28px 24px;text-align:center;">
-          <div style="font-size:32px;margin-bottom:8px;">🌐</div>
-          <div style="font-weight:700;font-size:16px;margin-bottom:3px;">전 세계</div>
-          <div style="font-size:12px;color:var(--ink-3);">기업 & 개인</div>
-        </div>
-      </div>
-
-      <div class="a a5" style="margin-top:20px;display:flex;gap:7px;flex-wrap:wrap;">
-        <span class="chip chip-b">Azure OpenAI Service</span>
-        <span class="chip chip-b">GitHub Copilot</span>
-        <span class="chip chip-b">Microsoft Copilot</span>
-        <span class="chip chip-b">Bing AI</span>
-      </div>
+  <div style="flex:1;position:relative;overflow:hidden;">
+    <div class="ch">
+      <div class="ch-num a">01</div>
+      <div class="a a2" style="font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--blue);margin-bottom:20px;">Chapter 01</div>
+      <h2 class="a a3" style="font-size:clamp(52px,7.5vw,100px);font-weight:800;line-height:.96;letter-spacing:-.04em;max-width:700px;">마이크로소프트,<br>도대체<br>뭐하는 회사야?</h2>
+      <p class="a a4 body" style="margin-top:28px;max-width:460px;color:var(--ink2);">"디지털 세상의 인프라 건설사 + 도구 제조사"</p>
     </div>
   </div>
 </div>
 
-<!-- ══════════ 04 — 네덜란드 법인 ══════════ -->
+<!-- ════════════════════════════════
+  04 — 핵심 사업 3가지
+════════════════════════════════ -->
 <div class="slide" id="s4">
-  <div class="pad">
-    <span class="stag">03 / Company Profile</span>
-    <div style="flex:1;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;">
-      <div>
-        <div class="eyebrow a">네덜란드 법인</div>
-        <div class="a a2" style="font-size:clamp(36px,5vw,64px);font-weight:800;line-height:.98;letter-spacing:-.04em;margin-bottom:24px;">
-          <span class="blue">36년</span>,<br>암스테르담에<br>뿌리내리다
-        </div>
-        <div class="a a3" style="font-size:15px;color:var(--ink-2);line-height:1.75;">
-          스키폴 공항 바로 옆 — 유럽 전역 파트너가 쉽게 올 수 있는 곳. 배달 물류센터가 고속도로 IC 옆에 있는 이유와 같다.
+  <div class="ct">
+    <span class="stag">01 / Microsoft</span>
+    <div class="eyebrow a">핵심 사업</div>
+    <div class="a a2 ct-title" style="margin-bottom:36px;">3가지 <span class="blue">핵심 사업</span></div>
+    <div class="a a3 col3" style="flex:1;align-items:stretch;gap:0;">
+      <div style="padding:28px 32px 28px 0;border-right:1px solid var(--ink5);display:flex;flex-direction:column;gap:14px;">
+        <div style="font-size:32px;">🖥️</div>
+        <div class="item-title">소프트웨어</div>
+        <div class="item-body">우리가 매일 쓰는 바로 그것.<br>개인부터 기업까지 모든 디지털 작업의 기반.</div>
+        <div style="margin-top:auto;display:flex;gap:6px;flex-wrap:wrap;">
+          <span class="chip">Windows</span>
+          <span class="chip">Office 365</span>
         </div>
       </div>
-      <div class="a a4" style="display:flex;flex-direction:column;gap:0;">
-        <div style="padding:24px 0;border-bottom:1px solid var(--ink-5);">
-          <div style="font-size:11px;font-weight:600;letter-spacing:.14em;color:var(--ink-4);text-transform:uppercase;margin-bottom:8px;">본사</div>
-          <div style="font-size:18px;font-weight:600;">Amsterdam Airport City</div>
+      <div style="padding:28px 32px;border-right:1px solid var(--ink5);display:flex;flex-direction:column;gap:14px;background:var(--blue-dim);">
+        <div style="font-size:32px;">☁️</div>
+        <div class="item-title blue">클라우드</div>
+        <div class="item-body">기업들의 "디지털 창고".<br>데이터 저장·처리·AI 연산까지. 유럽 최대 허브는 바로 네덜란드.</div>
+        <div style="margin-top:auto;display:flex;gap:6px;flex-wrap:wrap;">
+          <span class="chip chip-b">Azure</span>
+          <span class="chip">Teams</span>
         </div>
-        <div style="padding:24px 0;border-bottom:1px solid var(--ink-5);">
-          <div style="font-size:11px;font-weight:600;letter-spacing:.14em;color:var(--ink-4);text-transform:uppercase;margin-bottom:8px;">대표</div>
-          <div style="font-size:18px;font-weight:600;">Joris Schoonis (CEO)</div>
+      </div>
+      <div style="padding:28px 0 28px 32px;display:flex;flex-direction:column;gap:14px;">
+        <div style="font-size:32px;">🤖</div>
+        <div class="item-title">AI</div>
+        <div class="item-body">ChatGPT 만든 OpenAI의 최대 투자사. 우리가 쓰는 AI 대부분이 MS 인프라 위에서 돌아간다.</div>
+        <div style="margin-top:auto;display:flex;gap:6px;flex-wrap:wrap;">
+          <span class="chip">Copilot</span>
+          <span class="chip">ChatGPT</span>
+        </div>
+      </div>
+    </div>
+    <div class="fn a a4">출처: microsoft.com 공식 · AI Magazine (2025.10)</div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════
+  05 — OpenAI & AI 생태계
+════════════════════════════════ -->
+<div class="slide" id="s5">
+  <div class="ct" style="justify-content:center;">
+    <span class="stag">01 / AI Ecosystem</span>
+    <div class="eyebrow a">AI 생태계</div>
+    <div class="a a2 ct-title" style="margin-bottom:14px;">당신이 쓰는 AI의 뒤에는<br><span class="blue">Microsoft</span>가 있다</div>
+    <p class="a a3 body-lg" style="margin-bottom:40px;max-width:640px;">우리가 매일 쓰는 ChatGPT · Copilot · GitHub Copilot —<br>대부분이 Microsoft 인프라 위에서 돌아간다</p>
+    <div class="a a4" style="display:flex;align-items:stretch;gap:0;border:1.5px solid var(--ink5);border-radius:14px;overflow:hidden;max-width:700px;">
+      <div style="flex:1;padding:32px 28px;text-align:center;">
+        <div style="font-size:36px;margin-bottom:10px;">🤖</div>
+        <div class="item-title" style="margin-bottom:6px;">OpenAI</div>
+        <div class="item-body" style="font-size:15px;">ChatGPT 개발사</div>
+      </div>
+      <div style="width:1px;background:var(--ink5);"></div>
+      <div style="flex:1.3;padding:32px 28px;text-align:center;background:var(--blue-dim);">
+        <div class="logo" style="width:26px;height:26px;margin:0 auto 10px;"><span class="lr"></span><span class="lg"></span><span class="lb"></span><span class="ly"></span></div>
+        <div class="item-title blue" style="margin-bottom:6px;">Microsoft</div>
+        <div class="item-body" style="font-size:15px;color:var(--blue);">최대 투자 + 인프라 제공</div>
+      </div>
+      <div style="width:1px;background:var(--ink5);"></div>
+      <div style="flex:1;padding:32px 28px;text-align:center;">
+        <div style="font-size:36px;margin-bottom:10px;">🌐</div>
+        <div class="item-title" style="margin-bottom:6px;">전 세계</div>
+        <div class="item-body" style="font-size:15px;">기업 & 개인 사용자</div>
+      </div>
+    </div>
+    <div class="a a5" style="margin-top:22px;display:flex;gap:8px;flex-wrap:wrap;">
+      <span class="chip chip-b">Azure OpenAI Service</span>
+      <span class="chip chip-b">GitHub Copilot</span>
+      <span class="chip chip-b">Microsoft Copilot</span>
+    </div>
+    <div class="fn a a6">출처: AI Magazine (2025.10)</div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════
+  06 — CHAPTER 02
+════════════════════════════════ -->
+<div class="slide" id="s6">
+  <div style="flex:1;position:relative;overflow:hidden;">
+    <div class="ch">
+      <div class="ch-num a">02</div>
+      <div class="a a2" style="font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--blue);margin-bottom:20px;">Chapter 02</div>
+      <h2 class="a a3" style="font-size:clamp(52px,7.5vw,100px);font-weight:800;line-height:.96;letter-spacing:-.04em;">네덜란드 법인</h2>
+      <p class="a a4 body" style="margin-top:28px;max-width:420px;color:var(--ink2);">36년 역사 · Amsterdam Airport City · 1,000명+</p>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════
+  07 — 네덜란드 법인 프로필
+════════════════════════════════ -->
+<div class="slide" id="s7">
+  <div class="ct">
+    <span class="stag">02 / Company Profile</span>
+    <div class="eyebrow a">Microsoft Netherlands B.V.</div>
+    <div class="a a2 col2" style="flex:1;align-items:center;gap:64px;">
+      <div>
+        <div class="ct-title" style="margin-bottom:22px;"><span class="blue">36년</span>,<br>암스테르담에<br>뿌리내리다</div>
+        <p class="body" style="margin-bottom:22px;max-width:380px;">스키폴 공항 바로 옆 — 유럽 전역 파트너가 쉽게 올 수 있는 곳. 배달 물류센터가 고속도로 IC 옆에 있는 이유와 같다.</p>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <span class="chip chip-b">✈️ 스키폴 공항 인접</span>
+          <span class="chip chip-b">🏙️ 암스테르담 도심 근접</span>
+        </div>
+      </div>
+      <div class="a a3" style="display:flex;flex-direction:column;gap:0;">
+        <div style="padding:24px 0;border-bottom:1px solid var(--ink5);">
+          <div style="font-size:12px;font-weight:600;letter-spacing:.14em;color:var(--ink4);text-transform:uppercase;margin-bottom:8px;">본사</div>
+          <div style="font-size:20px;font-weight:700;">Amsterdam Airport City</div>
+        </div>
+        <div style="padding:24px 0;border-bottom:1px solid var(--ink5);">
+          <div style="font-size:12px;font-weight:600;letter-spacing:.14em;color:var(--ink4);text-transform:uppercase;margin-bottom:8px;">대표</div>
+          <div style="font-size:20px;font-weight:700;">Joris Schoonis (CEO)</div>
         </div>
         <div style="padding:24px 0;display:grid;grid-template-columns:1fr 1fr;gap:20px;">
           <div>
-            <div style="font-size:48px;font-weight:800;line-height:1;letter-spacing:-.04em;color:var(--blue);">1,000<span style="font-size:.5em;">+</span></div>
-            <div style="font-size:12px;color:var(--ink-3);margin-top:4px;">직원 수</div>
+            <div class="stat-n">1,000<span style="font-size:.5em;">+</span></div>
+            <div class="stat-l">직원 수</div>
           </div>
           <div>
-            <div style="font-size:48px;font-weight:800;line-height:1;letter-spacing:-.04em;">30만</div>
-            <div style="font-size:12px;color:var(--ink-3);margin-top:4px;">네덜란드 고객</div>
+            <div class="stat-n" style="color:var(--ink);">30만</div>
+            <div class="stat-l">네덜란드 고객</div>
           </div>
         </div>
       </div>
     </div>
-    <div class="footnote a a5">출처: Amsterdam Airport City 공식 인터뷰 · microsoft.com</div>
+    <div class="fn a a4">출처: Amsterdam Airport City 공식 인터뷰 · Anke den Ouden GM</div>
   </div>
 </div>
 
-<!-- ══════════ 05 — 오피스 철학 ══════════ -->
-<div class="slide" id="s5">
-  <div class="pad">
-    <span class="stag">04 / Office Philosophy</span>
-    <div style="flex:1;display:flex;flex-direction:column;justify-content:center;">
-      <div class="eyebrow a">오피스 철학</div>
-      <div class="a a2" style="font-size:clamp(36px,5.2vw,68px);font-weight:800;line-height:1.0;letter-spacing:-.04em;margin-bottom:36px;">
-        <span class="blue">9,000㎡</span> 오피스 중<br>직원 전용은<br>고작 <span style="text-decoration:underline;text-decoration-color:var(--blue);text-underline-offset:8px;">2,000㎡</span>
-      </div>
-
-      <div class="a a3" style="display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:680px;">
-        <div style="padding:22px;border:1.5px solid var(--ink-5);border-radius:10px;">
-          <div style="font-size:11px;font-weight:600;letter-spacing:.14em;color:var(--ink-4);text-transform:uppercase;margin-bottom:14px;">일반 기업</div>
-          <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;">
-            <li style="font-size:14px;color:var(--ink-2);display:flex;gap:8px;"><span style="color:var(--ink-4);">—</span> 직원만 입장 가능</li>
-            <li style="font-size:14px;color:var(--ink-2);display:flex;gap:8px;"><span style="color:var(--ink-4);">—</span> 각자 지정 책상</li>
-            <li style="font-size:14px;color:var(--ink-2);display:flex;gap:8px;"><span style="color:var(--ink-4);">—</span> 전체 공간 내부 전용</li>
-          </ul>
-        </div>
-        <div style="padding:22px;border:1.5px solid var(--blue);border-radius:10px;background:var(--blue-pale);">
-          <div style="font-size:11px;font-weight:600;letter-spacing:.14em;color:var(--blue);text-transform:uppercase;margin-bottom:14px;">Microsoft Netherlands</div>
-          <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;">
-            <li style="font-size:14px;color:var(--ink-2);display:flex;gap:8px;"><span style="color:var(--blue);">—</span> 외부인도 자유 입장</li>
-            <li style="font-size:14px;color:var(--ink-2);display:flex;gap:8px;"><span style="color:var(--blue);">—</span> 핫데스킹 (지정석 없음)</li>
-            <li style="font-size:14px;color:var(--ink-2);display:flex;gap:8px;"><span style="color:var(--blue);">—</span> <strong>7,000㎡ 외부 개방</strong></li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="a a4" style="margin-top:28px;font-size:15px;color:var(--ink-2);font-style:italic;border-left:2.5px solid var(--blue);padding-left:18px;line-height:1.65;">
-        "Work from anywhere, anytime, with anyone" —<br>벽을 허물고 생태계를 만드는 공간
-      </div>
-    </div>
-    <div class="footnote a a5">출처: Vecos Case Study (2025) · Office Snapshots (2023)</div>
-  </div>
-</div>
-
-<!-- ══════════ 06 — 왜 네덜란드 ══════════ -->
-<div class="slide" id="s6">
-  <div class="pad">
-    <span class="stag">05 / Why Netherlands</span>
-    <div style="flex:1;display:flex;flex-direction:column;justify-content:center;">
-      <div class="eyebrow a">클라우드 허브</div>
-      <div class="a a2" style="font-size:clamp(38px,5.5vw,72px);font-weight:800;line-height:1.0;letter-spacing:-.04em;margin-bottom:40px;">
-        네덜란드 =<br>유럽의 <span class="blue">클라우드 수도</span>
-      </div>
-
-      <div class="a a3" style="display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--ink-5);">
-        <div style="padding:28px 28px 28px 0;border-right:1px solid var(--ink-5);">
-          <div style="font-size:30px;margin-bottom:16px;">🌐</div>
-          <div style="font-weight:700;font-size:18px;margin-bottom:8px;color:var(--blue);">AMS-IX</div>
-          <div style="font-size:14px;color:var(--ink-2);line-height:1.65;">세계 최대 인터넷 교환소. 유럽 인터넷의 "중앙 교차로"</div>
-        </div>
-        <div style="padding:28px;border-right:1px solid var(--ink-5);">
-          <div style="font-size:30px;margin-bottom:16px;">🛫</div>
-          <div style="font-weight:700;font-size:18px;margin-bottom:8px;">지리적 요충지</div>
-          <div style="font-size:14px;color:var(--ink-2);line-height:1.65;">해저 케이블로 영국·유럽 전역과 초고속 연결. 인천공항의 아시아 허브 역할과 같다</div>
-        </div>
-        <div style="padding:28px 0 28px 28px;">
-          <div style="font-size:30px;margin-bottom:16px;">⚡</div>
-          <div style="font-weight:700;font-size:18px;margin-bottom:8px;">재생에너지</div>
-          <div style="font-size:14px;color:var(--ink-2);line-height:1.65;">해상풍력으로 데이터센터 전력 100% 공급. 청정 에너지로 돌아가는 거대한 서버실</div>
-        </div>
-      </div>
-    </div>
-    <div class="footnote a a4">출처: AI Data Center Index (2026.04) · Azure Blog (2025)</div>
-  </div>
-</div>
-
-<!-- ══════════ 07 — Azure 300MW ══════════ -->
-<div class="slide" id="s7">
-  <div class="pad" style="justify-content:center;">
-    <span class="stag">06 / Azure West Europe</span>
-    <div style="flex:1;display:flex;flex-direction:column;justify-content:center;">
-      <div class="eyebrow a">데이터센터 규모</div>
-      <div class="a a2" style="font-size:clamp(72px,12vw,160px);font-weight:900;line-height:.9;letter-spacing:-.05em;color:var(--blue);margin-bottom:8px;">300MW</div>
-      <div class="a a3" style="font-size:clamp(22px,3vw,36px);font-weight:700;color:var(--ink);margin-bottom:32px;letter-spacing:-.02em;">Azure West Europe 데이터센터</div>
-      <div class="a a4" style="display:flex;gap:0;border-top:1px solid var(--ink-5);max-width:640px;">
-        <div style="flex:1;padding:24px 0;border-right:1px solid var(--ink-5);">
-          <div style="font-size:32px;font-weight:800;letter-spacing:-.03em;margin-bottom:4px;">2014</div>
-          <div style="font-size:12px;color:var(--ink-3);">암스테르담 리전 출범</div>
-        </div>
-        <div style="flex:1;padding:24px 24px;border-right:1px solid var(--ink-5);">
-          <div style="font-size:32px;font-weight:800;letter-spacing:-.03em;margin-bottom:4px;">#125위</div>
-          <div style="font-size:12px;color:var(--ink-3);">전 세계 데이터센터 규모 순위</div>
-        </div>
-        <div style="flex:1;padding:24px 24px;">
-          <div style="font-size:32px;font-weight:800;letter-spacing:-.03em;margin-bottom:4px;">60만</div>
-          <div style="font-size:12px;color:var(--ink-3);">전기차 충전기 동시 가동 수준</div>
-        </div>
-      </div>
-    </div>
-    <div class="footnote a a5">출처: AI Data Center Index (2026.04) · Dutch Brief (2026.01)</div>
-  </div>
-</div>
-
-<!-- ══════════ 08 — 데이터센터 논란 ══════════ -->
+<!-- ════════════════════════════════
+  08 — CHAPTER 03
+════════════════════════════════ -->
 <div class="slide" id="s8">
-  <div class="pad">
-    <span class="stag">07 / Controversy</span>
-    <div style="flex:1;display:flex;flex-direction:column;justify-content:center;">
-      <div class="eyebrow a" style="color:#C0143C;">뜨거운 현안</div>
-      <div class="a a2" style="font-size:clamp(34px,4.8vw,62px);font-weight:800;line-height:1.05;letter-spacing:-.035em;margin-bottom:36px;">
-        건설 금지령에도<br><span class="blue">짓고 있다</span>
-      </div>
-
-      <div class="a a3" style="display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:760px;">
-        <div style="padding:24px;background:#FFF5F7;border:1.5px solid #FFD0D8;border-radius:10px;">
-          <div style="font-size:11px;font-weight:600;letter-spacing:.14em;color:#C0143C;text-transform:uppercase;margin-bottom:14px;">암스테르담市</div>
-          <div style="font-size:15px;font-weight:600;margin-bottom:10px;line-height:1.4;">"2030년까지 데이터센터 신규 건설 금지"</div>
-          <div style="font-size:13px;color:var(--ink-2);line-height:1.65;">이유: 전력망 포화 → 일반 가정·중소기업이 쓸 전기가 부족. 소비량이 Haarlem 전체 가구에 맞먹음.</div>
-        </div>
-        <div style="padding:24px;background:var(--blue-pale);border:1.5px solid var(--blue);border-radius:10px;">
-          <div style="font-size:11px;font-weight:600;letter-spacing:.14em;color:var(--blue);text-transform:uppercase;margin-bottom:14px;">Microsoft 행보</div>
-          <div style="font-size:15px;font-weight:600;margin-bottom:10px;line-height:1.4;">85m짜리 건물 3개 동 규모 신규 건설 중</div>
-          <div style="font-size:13px;color:var(--ink-2);line-height:1.65;">"기허가된 파이프라인이라 법적으로는 문제 없음" — 30만 고객이 네덜란드 내 데이터 보관을 원한다</div>
-        </div>
-      </div>
-
-      <div class="a a4" style="margin-top:22px;border-left:2.5px solid var(--ink-4);padding-left:18px;font-size:14px;color:var(--ink-2);font-style:italic;line-height:1.65;max-width:600px;">
-        "미국 빅테크가 다 가져가서 네덜란드 중소 데이터센터들은 전기조차 못 구하고 있다"<br>
-        <span style="font-size:12px;color:var(--ink-3);font-style:normal;">— 리크 파이퍼스, 전 Equinix 대표</span>
-      </div>
+  <div style="flex:1;position:relative;overflow:hidden;">
+    <div class="ch">
+      <div class="ch-num a">03</div>
+      <div class="a a2" style="font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--blue);margin-bottom:20px;">Chapter 03</div>
+      <h2 class="a a3" style="font-size:clamp(52px,7.5vw,100px);font-weight:800;line-height:.96;letter-spacing:-.04em;">오피스가<br>특이해요</h2>
+      <p class="a a4 body" style="margin-top:28px;max-width:440px;color:var(--ink2);">"카페처럼 열려있는 회사" — 오픈 이노베이션 허브</p>
     </div>
-    <div class="footnote a a5">출처: Dutch Brief (2026.01)</div>
   </div>
 </div>
 
-<!-- ══════════ 09 — 지속가능성 목표 ══════════ -->
+<!-- ════════════════════════════════
+  09 — 오피스 철학
+════════════════════════════════ -->
 <div class="slide" id="s9">
-  <div class="pad">
-    <span class="stag">08 / Sustainability</span>
-    <div style="flex:1;display:flex;flex-direction:column;justify-content:center;">
-      <div class="eyebrow a">2030 목표</div>
-      <div class="a a2" style="font-size:clamp(36px,5vw,64px);font-weight:800;line-height:1.0;letter-spacing:-.04em;margin-bottom:40px;">
-        서버 수백만 대를 돌리는 회사의<br><span class="blue">공격적인 약속</span>
-      </div>
+  <div class="ct">
+    <span class="stag">03 / Office Philosophy</span>
+    <div class="eyebrow a">공간이 철학이다</div>
+    <div class="a a2 col2-narrow" style="flex:1;align-items:center;gap:60px;">
 
-      <div class="a a3" style="display:flex;flex-direction:column;gap:0;max-width:680px;">
-        <div style="display:flex;align-items:center;gap:24px;padding:22px 0;border-bottom:1px solid var(--ink-5);">
-          <span style="font-size:28px;flex-shrink:0;">🌿</span>
-          <div style="flex:1;">
-            <div style="font-weight:700;font-size:17px;margin-bottom:4px;">탄소 네거티브</div>
-            <div style="font-size:13px;color:var(--ink-3);">내뿜는 탄소보다 흡수하는 탄소가 더 많은 회사</div>
-          </div>
-          <span class="chip chip-b" style="flex-shrink:0;font-size:12px;">✅ 2025 달성</span>
-        </div>
-        <div style="display:flex;align-items:center;gap:24px;padding:22px 0;border-bottom:1px solid var(--ink-5);">
-          <span style="font-size:28px;flex-shrink:0;">💧</span>
-          <div style="flex:1;">
-            <div style="font-weight:700;font-size:17px;margin-bottom:4px;">물 긍정 기업</div>
-            <div style="font-size:13px;color:var(--ink-3);">냉각에 쓰는 물보다 더 많은 물을 자연에 돌려주기</div>
-          </div>
-          <span class="chip chip-b" style="flex-shrink:0;font-size:12px;">✅ 150만명</span>
-        </div>
-        <div style="display:flex;align-items:center;gap:24px;padding:22px 0;">
-          <span style="font-size:28px;flex-shrink:0;">♻️</span>
-          <div style="flex:1;">
-            <div style="font-weight:700;font-size:17px;margin-bottom:4px;">제로 웨이스트</div>
-            <div style="font-size:13px;color:var(--ink-3);">쓰레기 최소화 · 서버 부품 재활용</div>
-          </div>
-          <span class="chip chip-b" style="flex-shrink:0;font-size:12px;">✅ 90.9% 재활용</span>
-        </div>
-      </div>
-    </div>
-    <div class="footnote a a4">출처: Microsoft Sustainability Report (2025)</div>
-  </div>
-</div>
-
-<!-- ══════════ 10 — 재생에너지 100% ══════════ -->
-<div class="slide" id="s10">
-  <div class="pad" style="justify-content:center;align-items:center;">
-    <span class="stag">09 / Renewable Energy</span>
-    <div style="flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;">
-      <div class="eyebrow a" style="justify-content:center;">2025년 달성</div>
-      <div class="a a2" style="font-size:clamp(100px,18vw,200px);font-weight:900;line-height:.9;letter-spacing:-.06em;color:var(--blue);">100%</div>
-      <div class="a a3" style="font-size:clamp(20px,2.8vw,34px);font-weight:700;margin-bottom:20px;letter-spacing:-.02em;">재생에너지 전력 전환 완료</div>
-      <div class="a a4" style="font-size:15px;color:var(--ink-2);line-height:1.75;max-width:480px;margin-bottom:32px;">
-        전 세계 데이터센터 전력을 100% 재생에너지로.<br>네덜란드는 <strong>해상풍력 장기계약(PPA)</strong>으로 기여.
-      </div>
-      <div class="a a5" style="display:flex;gap:10px;">
-        <span class="chip" style="font-size:13px;padding:7px 14px;">🌬️ 해상풍력</span>
-        <span class="chip" style="font-size:13px;padding:7px 14px;">☀️ 태양광</span>
-        <span class="chip chip-b" style="font-size:13px;padding:7px 14px;">🎯 2030 탄소 네거티브</span>
-      </div>
-    </div>
-    <div class="footnote a a6" style="text-align:center;border:none;">출처: Microsoft 공식 블로그 (2026.02) · Microsoft Source EMEA (2025)</div>
-  </div>
-</div>
-
-<!-- ══════════ 11 — Circular Center ══════════ -->
-<div class="slide" id="s11">
-  <div class="pad">
-    <span class="stag">10 / Circular Economy</span>
-    <div style="flex:1;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;">
       <div>
-        <div class="eyebrow a">세계 최초</div>
-        <div class="a a2" style="font-size:clamp(36px,5vw,64px);font-weight:800;line-height:1.0;letter-spacing:-.04em;margin-bottom:22px;">
-          암스테르담이<br><span class="blue">원조</span>다
-        </div>
-        <div class="a a3" style="font-size:15px;color:var(--ink-2);line-height:1.75;margin-bottom:20px;">
-          2020년, 전 세계 최초 Circular Center를 암스테르담에 개설. 서버를 버리지 않고 부품을 분리해 재활용하는 센터 — 핸드폰 재활용 센터의 서버 버전.
-        </div>
-        <div class="a a4" style="padding:16px 18px;background:var(--blue-pale);border-radius:8px;font-size:14px;font-weight:500;color:var(--blue);">
-          🌍 전 세계 8개소로 확대 — 암스테르담이 시작점
-        </div>
+        <div class="ct-title" style="margin-bottom:24px;"><span class="blue">9,000㎡</span> 중<br>직원 전용은<br>2,000㎡뿐</div>
+        <p class="body" style="margin-bottom:24px;">나머지 <strong>7,000㎡</strong>는 고객·파트너·스타트업 누구나 와서 일할 수 있는 열린 공간.</p>
+        <div class="pull a a3">"Work from anywhere, anytime, with anyone"<br><span style="font-size:14px;color:var(--ink3);font-style:normal;">— Microsoft Netherlands 핵심 철학</span></div>
       </div>
-      <div class="a a5" style="display:flex;flex-direction:column;gap:0;">
-        <div style="padding:28px 0;border-bottom:1px solid var(--ink-5);">
-          <div style="font-size:64px;font-weight:800;line-height:1;letter-spacing:-.04em;color:var(--blue);">90.9%</div>
-          <div style="font-size:13px;color:var(--ink-3);margin-top:6px;">서버 부품 재활용률 (목표 90% 조기 달성)</div>
+
+      <div class="a a4" style="display:flex;flex-direction:column;gap:14px;">
+        <div style="padding:24px;background:var(--ink5);border-radius:10px;">
+          <div style="font-size:11px;font-weight:600;letter-spacing:.14em;color:var(--ink3);text-transform:uppercase;margin-bottom:14px;">일반 기업</div>
+          <div class="item-body" style="display:flex;flex-direction:column;gap:9px;">
+            <div style="display:flex;gap:10px;"><span style="color:var(--ink4);">—</span> 직원만 입장 가능</div>
+            <div style="display:flex;gap:10px;"><span style="color:var(--ink4);">—</span> 각자 지정 책상</div>
+            <div style="display:flex;gap:10px;"><span style="color:var(--ink4);">—</span> 전체 공간 내부 전용</div>
+          </div>
         </div>
-        <div style="padding:28px 0;">
-          <div style="font-size:64px;font-weight:800;line-height:1;letter-spacing:-.04em;">8곳</div>
-          <div style="font-size:13px;color:var(--ink-3);margin-top:6px;">전 세계 Circular Center 수</div>
+        <div style="padding:24px;background:var(--blue-dim);border:1.5px solid var(--blue);border-radius:10px;">
+          <div style="font-size:11px;font-weight:600;letter-spacing:.14em;color:var(--blue);text-transform:uppercase;margin-bottom:14px;">Microsoft Netherlands</div>
+          <div class="item-body" style="display:flex;flex-direction:column;gap:9px;">
+            <div style="display:flex;gap:10px;"><span class="blue">—</span> 외부인도 자유 입장</div>
+            <div style="display:flex;gap:10px;"><span class="blue">—</span> 핫데스킹 (지정석 없음)</div>
+            <div style="display:flex;gap:10px;"><span class="blue">—</span> <strong>7,000㎡ 외부 개방</strong></div>
+          </div>
         </div>
       </div>
     </div>
-    <div class="footnote a a6">출처: Microsoft Source EMEA (2025)</div>
+    <div class="fn a a5">출처: Vecos Case Study (2025) · Office Snapshots (2023)</div>
   </div>
 </div>
 
-<!-- ══════════ 12 — 지역사회 ══════════ -->
+<!-- ════════════════════════════════
+  10 — CHAPTER 04
+════════════════════════════════ -->
+<div class="slide" id="s10">
+  <div style="flex:1;position:relative;overflow:hidden;">
+    <div class="ch">
+      <div class="ch-num a">04</div>
+      <div class="a a2" style="font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--blue);margin-bottom:20px;">Chapter 04</div>
+      <h2 class="a a3" style="font-size:clamp(52px,7.5vw,100px);font-weight:800;line-height:.96;letter-spacing:-.04em;">네덜란드 =<br>유럽의<br><span class="blue">클라우드 수도</span></h2>
+      <p class="a a4 body" style="margin-top:28px;max-width:440px;color:var(--ink2);">AMS-IX · 해저 케이블 · 300MW · 해상풍력</p>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════
+  11 — 왜 네덜란드 + Azure 규모
+════════════════════════════════ -->
+<div class="slide" id="s11">
+  <div class="ct">
+    <span class="stag">04 / Cloud Hub</span>
+    <div class="eyebrow a">입지 조건 · 인프라 규모</div>
+    <div class="a a2 col2" style="flex:1;align-items:start;gap:0;">
+      <div style="padding-right:48px;border-right:1px solid var(--ink5);display:flex;flex-direction:column;gap:0;">
+        <div class="ct-title" style="margin-bottom:28px;">왜 하필<br><span class="blue">네덜란드</span>인가?</div>
+        <div style="display:flex;flex-direction:column;gap:0;">
+          <div class="row-item">
+            <div style="font-size:26px;flex-shrink:0;width:40px;">🌐</div>
+            <div>
+              <div class="item-title blue">AMS-IX</div>
+              <div class="item-body">세계 최대 인터넷 교환소. 유럽 인터넷의 "중앙 교차로"</div>
+            </div>
+          </div>
+          <div class="row-item">
+            <div style="font-size:26px;flex-shrink:0;width:40px;">🛫</div>
+            <div>
+              <div class="item-title">지리적 요충지</div>
+              <div class="item-body">해저 케이블로 영국·유럽 전역 초고속 연결</div>
+            </div>
+          </div>
+          <div class="row-item" style="border-bottom:none;">
+            <div style="font-size:26px;flex-shrink:0;width:40px;">⚡</div>
+            <div>
+              <div class="item-title">재생에너지</div>
+              <div class="item-body">해상풍력으로 데이터센터 전력 100% 공급</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="a a3" style="padding-left:48px;display:flex;flex-direction:column;justify-content:center;gap:0;">
+        <div class="ct-title" style="margin-bottom:28px;">Azure West Europe<br>데이터센터 규모</div>
+        <div style="display:flex;flex-direction:column;gap:0;">
+          <div style="padding:20px 0;border-bottom:1px solid var(--ink5);">
+            <div class="stat-n">300MW</div>
+            <div class="stat-l">전력 규모 (전기차 충전기 60만 대 동시 가동 수준)</div>
+          </div>
+          <div style="padding:20px 0;border-bottom:1px solid var(--ink5);">
+            <div class="stat-n" style="color:var(--ink);">2014</div>
+            <div class="stat-l">Azure West Europe 리전 출범 (암스테르담)</div>
+          </div>
+          <div style="padding:20px 0;">
+            <div class="stat-n" style="color:var(--ink);">#125위</div>
+            <div class="stat-l">전 세계 데이터센터 규모 순위 (약 335개 중)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="fn a a4">출처: AI Data Center Index (2026.04) · Azure Blog (2025)</div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════
+  12 — 데이터센터 논란
+════════════════════════════════ -->
 <div class="slide" id="s12">
-  <div class="pad">
-    <span class="stag">11 / Community</span>
-    <div style="flex:1;display:flex;flex-direction:column;justify-content:center;">
-      <div class="eyebrow a">지역사회 기여</div>
-      <div class="a a2" style="font-size:clamp(34px,4.8vw,60px);font-weight:800;line-height:1.05;letter-spacing:-.035em;margin-bottom:36px;">
-        기술만 파는 회사가<br><span class="blue">아니에요</span>
+  <div class="ct">
+    <span class="stag">04 / Controversy</span>
+    <div class="eyebrow a" style="color:#C0143C;">뜨거운 현안</div>
+    <div class="a a2 ct-title" style="margin-bottom:28px;">건설 금지령에도 <span class="blue">짓고 있다</span></div>
+    <div class="a a3 col2" style="flex:1;align-items:start;gap:28px;">
+      <div style="padding:28px;background:#FFF5F7;border:1.5px solid #FFD0D8;border-radius:12px;display:flex;flex-direction:column;gap:14px;">
+        <div style="font-size:11px;font-weight:700;letter-spacing:.15em;color:#C0143C;text-transform:uppercase;">암스테르담市</div>
+        <div class="item-title" style="line-height:1.3;">"2030년까지 데이터센터 신규 건설 금지"</div>
+        <div class="item-body">전력망 포화 → 일반 가정·중소기업이 쓸 전기가 부족. 소비량이 Haarlem 전체 가구에 맞먹음.</div>
+        <div style="border-left:2.5px solid #C0143C;padding:12px 16px;background:#FFE8EC;border-radius:0 6px 6px 0;font-size:16px;font-style:italic;color:#8B0000;line-height:1.6;">"미국 빅테크가 다 가져가서 중소 데이터센터들은 전기조차 못 구하고 있다"<br><span style="font-size:13px;font-style:normal;color:#C0143C;">— 리크 파이퍼스, 전 Equinix 대표</span></div>
       </div>
-      <div class="a a3" style="display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--ink-5);">
-        <div style="padding:24px 24px 24px 0;border-right:1px solid var(--ink-5);">
-          <div style="font-size:26px;margin-bottom:14px;">🏫</div>
-          <div style="font-weight:700;font-size:17px;margin-bottom:6px;">Dreamspace NL DC</div>
-          <span class="chip chip-b" style="font-size:11px;margin-bottom:12px;display:inline-block;">교육 프로그램</span>
-          <div style="font-size:13px;color:var(--ink-2);line-height:1.65;">가정 형편에 상관없이 모든 학생에게 디지털 교육. 교통부터 수업까지 전 과정 지원.</div>
-        </div>
-        <div style="padding:24px;border-right:1px solid var(--ink-5);">
-          <div style="font-size:26px;margin-bottom:14px;">🌾</div>
-          <div style="font-weight:700;font-size:17px;margin-bottom:6px;">AMS FarmBeats</div>
-          <span class="chip" style="font-size:11px;margin-bottom:12px;display:inline-block;">농업 AI · 5년 프로젝트</span>
-          <div style="font-size:13px;color:var(--ink-2);line-height:1.65;">AI로 물 낭비 없이 최적 농사. "오늘 이 밭에 물 이만큼만 줘도 돼요" AI 시스템.</div>
-        </div>
-        <div style="padding:24px 0 24px 24px;">
-          <div style="font-size:26px;margin-bottom:14px;">🤝</div>
-          <div style="font-weight:700;font-size:17px;margin-bottom:6px;">디지털 포용</div>
-          <span class="chip" style="font-size:11px;margin-bottom:12px;display:inline-block;">IT 교육 지원</span>
-          <div style="font-size:13px;color:var(--ink-2);line-height:1.65;">비영리·소외계층 IT 교육. 북홀란드 지역 IT 인력 취업 연결.</div>
-        </div>
+      <div style="padding:28px;background:var(--blue-dim);border:1.5px solid var(--blue);border-radius:12px;display:flex;flex-direction:column;gap:14px;">
+        <div style="font-size:11px;font-weight:700;letter-spacing:.15em;color:var(--blue);text-transform:uppercase;">Microsoft 행보</div>
+        <div class="item-title" style="line-height:1.3;">85m 건물 3개 동 규모 신규 건설 중</div>
+        <div class="item-body">"기허가된 파이프라인이라 법적으로 문제 없음"</div>
+        <div class="pull" style="font-size:16px;">"30만 고객이 데이터를 네덜란드 안에 보관하고 싶어 한다"<br><span style="font-size:13px;font-style:normal;">— Joris Schoonis CEO</span></div>
       </div>
     </div>
-    <div class="footnote a a4">출처: Microsoft Local 공식 페이지 (netherlands-community-investments)</div>
+    <div class="fn a a4">출처: Dutch Brief (2026.01)</div>
   </div>
 </div>
 
-<!-- ══════════ 13 — 현안 3가지 ══════════ -->
+<!-- ════════════════════════════════
+  13 — CHAPTER 05
+════════════════════════════════ -->
 <div class="slide" id="s13">
-  <div class="pad">
-    <span class="stag">12 / Issues</span>
-    <div style="flex:1;display:flex;flex-direction:column;justify-content:center;">
-      <div class="eyebrow a">빛과 그림자</div>
-      <div class="a a2" style="font-size:clamp(34px,4.8vw,60px);font-weight:800;line-height:1.05;letter-spacing:-.035em;margin-bottom:36px;">
-        기술의 편리함 뒤에<br>따라오는 <span style="color:#C0143C;">과제</span>
-      </div>
-
-      <div class="a a3" style="display:flex;flex-direction:column;gap:0;max-width:760px;">
-        <div style="display:flex;gap:24px;padding:20px 0;border-bottom:1px solid var(--ink-5);">
-          <span class="mono" style="font-size:11px;color:var(--blue);font-weight:600;padding-top:2px;flex-shrink:0;width:24px;">01</span>
-          <div>
-            <div style="font-weight:700;font-size:17px;margin-bottom:5px;">전력망 과부하</div>
-            <div style="font-size:14px;color:var(--ink-2);line-height:1.65;">암스테르담市 신규 건설 금지 → 그래도 MS는 짓는다. Haarlem 전체 가구 소비량에 맞먹는 전력. 빅테크 vs 중소 데이터센터 생존 위기.</div>
-          </div>
-        </div>
-        <div style="display:flex;gap:24px;padding:20px 0;border-bottom:1px solid var(--ink-5);">
-          <span class="mono" style="font-size:11px;color:var(--ink-3);font-weight:600;padding-top:2px;flex-shrink:0;width:24px;">02</span>
-          <div>
-            <div style="font-weight:700;font-size:17px;margin-bottom:5px;">디지털 주권 논쟁</div>
-            <div style="font-size:14px;color:var(--ink-2);line-height:1.65;">"유럽 안에 데이터 저장" = 진짜 주권인가? 운영사는 미국 기업. 현재진행형 논쟁.</div>
-          </div>
-        </div>
-        <div style="display:flex;gap:24px;padding:20px 0;">
-          <span class="mono" style="font-size:11px;color:var(--ink-3);font-weight:600;padding-top:2px;flex-shrink:0;width:24px;">03</span>
-          <div>
-            <div style="font-weight:700;font-size:17px;margin-bottom:5px;">EU AI Act 대응</div>
-            <div style="font-size:14px;color:var(--ink-2);line-height:1.65;">2024년 8월 발효, 2026년 중반 주요 조항 적용. MS도 규정 준수 체계 구축 중. "책임 있는 AI" 압박 가중.</div>
-          </div>
-        </div>
-      </div>
+  <div style="flex:1;position:relative;overflow:hidden;">
+    <div class="ch">
+      <div class="ch-num a">05</div>
+      <div class="a a2" style="font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--blue);margin-bottom:20px;">Chapter 05</div>
+      <h2 class="a a3" style="font-size:clamp(52px,7.5vw,100px);font-weight:800;line-height:.96;letter-spacing:-.04em;">"IT 기업도<br>환경을<br>책임진다"</h2>
+      <p class="a a4 body" style="margin-top:28px;max-width:440px;color:var(--ink2);">지속가능성 — 2030년 3대 목표 · Circular Center</p>
     </div>
-    <div class="footnote a a4">출처: Dutch Brief (2026.01) · Chambers & Partners AI Law Netherlands (2025)</div>
   </div>
 </div>
 
-<!-- ══════════ 14 — Q&A 질문 리스트 ══════════ -->
+<!-- ════════════════════════════════
+  14 — 지속가능성 2030 목표
+════════════════════════════════ -->
 <div class="slide" id="s14">
-  <div class="pad">
-    <span class="stag">13 / Questions</span>
-    <div style="flex:1;display:flex;flex-direction:column;justify-content:center;">
-      <div class="eyebrow a">방문 전 질문</div>
-      <div class="a a2" style="font-size:clamp(34px,4.8vw,60px);font-weight:800;line-height:1.05;letter-spacing:-.035em;margin-bottom:40px;">
-        가서 물어볼<br><span class="blue">질문 4가지</span>
+  <div class="ct">
+    <span class="stag">05 / Sustainability</span>
+    <div class="eyebrow a">2030년 목표 · 현황</div>
+    <div class="a a2 ct-title" style="margin-bottom:32px;">서버 수백만 대 회사의<br><span class="blue">공격적인 약속</span></div>
+    <div class="a a3" style="flex:1;display:flex;flex-direction:column;gap:0;max-width:800px;">
+      <div class="row-item">
+        <div style="font-size:30px;width:44px;flex-shrink:0;">🌿</div>
+        <div style="flex:1;">
+          <div class="item-title">탄소 네거티브</div>
+          <div class="item-body">내뿜는 탄소보다 흡수하는 탄소가 더 많은 회사</div>
+        </div>
+        <span class="chip chip-b" style="flex-shrink:0;font-size:14px;padding:7px 14px;">✅ 2025 재생에너지 100%</span>
       </div>
-
-      <div class="a a3" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:760px;">
-        <div style="padding:22px;border:1.5px solid var(--ink-5);border-radius:10px;">
-          <div class="mono" style="font-size:11px;color:var(--blue);font-weight:600;margin-bottom:10px;">Q1 — AI 규제·책임</div>
-          <div style="font-size:15px;font-weight:600;line-height:1.4;">EU AI Act에 맞춰 Azure 서비스를 어떻게 바꾸고 있나요?</div>
+      <div class="row-item">
+        <div style="font-size:30px;width:44px;flex-shrink:0;">💧</div>
+        <div style="flex:1;">
+          <div class="item-title">물 긍정 기업</div>
+          <div class="item-body">냉각에 쓰는 물보다 더 많은 물을 자연에 돌려주기</div>
         </div>
-        <div style="padding:22px;border:1.5px solid var(--ink-5);border-radius:10px;">
-          <div class="mono" style="font-size:11px;color:var(--blue);font-weight:600;margin-bottom:10px;">Q2 — 지속가능성</div>
-          <div style="font-size:15px;font-weight:600;line-height:1.4;">전력 소비 문제를 기술적으로 어떻게 해결할 계획인가요?</div>
+        <span class="chip chip-b" style="flex-shrink:0;font-size:14px;padding:7px 14px;">✅ 150만 명 물 공급</span>
+      </div>
+      <div class="row-item" style="border-bottom:none;">
+        <div style="font-size:30px;width:44px;flex-shrink:0;">♻️</div>
+        <div style="flex:1;">
+          <div class="item-title">제로 웨이스트</div>
+          <div class="item-body">쓰레기 최소화 · 서버 부품 재활용 — 2020년 전 세계 최초 Circular Center를 암스테르담에 개설</div>
         </div>
-        <div style="padding:22px;border:1.5px solid var(--ink-5);border-radius:10px;">
-          <div class="mono" style="font-size:11px;color:var(--blue);font-weight:600;margin-bottom:10px;">Q3 — 기회 탐색</div>
-          <div style="font-size:15px;font-weight:600;line-height:1.4;">CS·AI 전공 학생이 Microsoft와 협업하거나 인턴십하는 방법이 있나요?</div>
-        </div>
-        <div style="padding:22px;border:1.5px solid var(--ink);border-radius:10px;background:var(--ink);">
-          <div class="mono" style="font-size:11px;color:var(--blue-pale);font-weight:600;margin-bottom:10px;">Q4 — 비판적 시각</div>
-          <div style="font-size:15px;font-weight:600;line-height:1.4;color:var(--white);">"디지털 주권"을 미국 기업이 말하는 게 설득력이 있을까요?</div>
-        </div>
+        <span class="chip chip-b" style="flex-shrink:0;font-size:14px;padding:7px 14px;">✅ 재활용률 90.9%</span>
       </div>
     </div>
-    <div class="footnote a a4">출처: notion.md 방문 준비 질문 리스트</div>
+    <div class="fn a a4">출처: Microsoft Sustainability Report (2025) · Microsoft Source EMEA (2025)</div>
   </div>
 </div>
 
-<!-- ══════════ 15 — KEY TAKEAWAY ══════════ -->
+<!-- ════════════════════════════════
+  15 — 재생에너지 100% (big number)
+════════════════════════════════ -->
 <div class="slide" id="s15">
-  <div class="pad">
-    <span class="stag">Key Takeaway</span>
-    <div style="flex:1;display:flex;flex-direction:column;justify-content:center;">
-      <div class="eyebrow a">결론</div>
-      <div class="a a2" style="font-size:clamp(36px,5.2vw,68px);font-weight:800;line-height:1.0;letter-spacing:-.04em;margin-bottom:40px;">
-        <span class="blue">"기술의 힘"</span>과<br>"책임"을 함께<br>말하는 기업
-      </div>
+  <div class="ct" style="justify-content:center;align-items:center;text-align:center;">
+    <span class="stag">05 / Renewable</span>
+    <div class="eyebrow a" style="justify-content:center;">2025년 달성</div>
+    <div class="a a2" style="font-size:clamp(110px,18vw,220px);font-weight:900;line-height:.88;letter-spacing:-.06em;color:var(--blue);">100%</div>
+    <div class="a a3" style="font-size:clamp(24px,3vw,38px);font-weight:700;margin-bottom:18px;letter-spacing:-.02em;">재생에너지 전력 전환 완료</div>
+    <p class="a a4 body-lg" style="max-width:560px;margin-bottom:28px;">전 세계 데이터센터 전력을 100% 재생에너지로.<br>네덜란드는 <strong>해상풍력 장기계약(PPA)</strong>으로 기여.</p>
+    <div class="a a5" style="display:flex;gap:10px;justify-content:center;">
+      <span class="chip" style="font-size:14px;padding:8px 16px;">🌬️ 해상풍력</span>
+      <span class="chip" style="font-size:14px;padding:8px 16px;">☀️ 태양광</span>
+      <span class="chip chip-b" style="font-size:14px;padding:8px 16px;">🎯 2030 탄소 네거티브</span>
+    </div>
+    <div class="fn a a6" style="border:none;text-align:center;margin-top:20px;">출처: Microsoft 공식 블로그 (2026.02)</div>
+  </div>
+</div>
 
-      <div class="a a3" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:680px;">
-        <div style="display:flex;gap:14px;padding:18px;border:1.5px solid var(--ink-5);border-radius:8px;align-items:flex-start;">
-          <span style="font-size:20px;flex-shrink:0;">☁️</span>
-          <div>
-            <div style="font-weight:700;font-size:14px;margin-bottom:3px;">유럽 최대 클라우드 허브</div>
-            <div style="font-size:12px;color:var(--ink-3);">AMS-IX · 300MW</div>
-          </div>
-        </div>
-        <div style="display:flex;gap:14px;padding:18px;border:1.5px solid var(--ink-5);border-radius:8px;align-items:flex-start;">
-          <span style="font-size:20px;flex-shrink:0;">🏢</span>
-          <div>
-            <div style="font-weight:700;font-size:14px;margin-bottom:3px;">오픈 이노베이션 공간</div>
-            <div style="font-size:12px;color:var(--ink-3);">9,000㎡ 중 7,000㎡ 개방</div>
-          </div>
-        </div>
-        <div style="display:flex;gap:14px;padding:18px;border:1.5px solid var(--ink-5);border-radius:8px;align-items:flex-start;">
-          <span style="font-size:20px;flex-shrink:0;">🌱</span>
-          <div>
-            <div style="font-weight:700;font-size:14px;margin-bottom:3px;">지속가능성 선도</div>
-            <div style="font-size:12px;color:var(--ink-3);">재생에너지 100% · 2030 탄소 네거티브</div>
-          </div>
-        </div>
-        <div style="display:flex;gap:14px;padding:18px;border:1.5px solid var(--ink-5);border-radius:8px;align-items:flex-start;">
-          <span style="font-size:20px;flex-shrink:0;">⚠️</span>
-          <div>
-            <div style="font-weight:700;font-size:14px;margin-bottom:3px;">해결 과제</div>
-            <div style="font-size:12px;color:var(--ink-3);">전력망 · 디지털 주권 · AI 규제</div>
-          </div>
-        </div>
+<!-- ════════════════════════════════
+  16 — CHAPTER 06
+════════════════════════════════ -->
+<div class="slide" id="s16">
+  <div style="flex:1;position:relative;overflow:hidden;">
+    <div class="ch">
+      <div class="ch-num a">06</div>
+      <div class="a a2" style="font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--blue);margin-bottom:20px;">Chapter 06</div>
+      <h2 class="a a3" style="font-size:clamp(52px,7.5vw,100px);font-weight:800;line-height:.96;letter-spacing:-.04em;">지역사회 기여<br>&amp; 현안</h2>
+      <p class="a a4 body" style="margin-top:28px;max-width:460px;color:var(--ink2);">교육 · 농업 AI · 디지털 주권 · EU AI Act</p>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════
+  17 — 지역사회 3대 프로그램
+════════════════════════════════ -->
+<div class="slide" id="s17">
+  <div class="ct">
+    <span class="stag">06 / Community</span>
+    <div class="eyebrow a">지역사회 기여</div>
+    <div class="a a2 ct-title" style="margin-bottom:32px;">기술만 파는 회사가 <span class="blue">아니에요</span></div>
+    <div class="a a3 col3" style="flex:1;gap:0;align-items:stretch;">
+      <div style="padding:24px 28px 24px 0;border-right:1px solid var(--ink5);display:flex;flex-direction:column;gap:12px;">
+        <div style="font-size:30px;">🏫</div>
+        <div class="item-title">Dreamspace NL DC</div>
+        <span class="chip chip-b" style="width:fit-content;font-size:12px;">교육 프로그램</span>
+        <div class="item-body">가정 형편과 상관없이 모든 학생에게 디지털 기술 교육. 교통수단부터 수업까지 전 과정 지원.</div>
+        <div style="margin-top:auto;font-size:15px;font-style:italic;color:var(--ink3);line-height:1.5;">"AI 시대에는 디지털 교육 격차가 곧 기회 격차"</div>
+      </div>
+      <div style="padding:24px 28px;border-right:1px solid var(--ink5);display:flex;flex-direction:column;gap:12px;">
+        <div style="font-size:30px;">🌾</div>
+        <div class="item-title">AMS FarmBeats</div>
+        <span class="chip" style="width:fit-content;font-size:12px;">농업 AI · 5년 프로젝트</span>
+        <div class="item-body">MS + 네덜란드 농업 협동조합 + 연구기관. AI로 물 낭비 없이 최적 농사.</div>
+        <div style="margin-top:auto;font-size:15px;font-style:italic;color:var(--ink3);line-height:1.5;">"오늘 이 밭에 물 이만큼만 줘도 돼요" AI 시스템</div>
+      </div>
+      <div style="padding:24px 0 24px 28px;display:flex;flex-direction:column;gap:12px;">
+        <div style="font-size:30px;">🤝</div>
+        <div class="item-title">디지털 포용</div>
+        <span class="chip" style="width:fit-content;font-size:12px;">IT 교육 지원</span>
+        <div class="item-body">비영리단체·소외계층 IT 교육 지원. 북홀란드 지역 IT 인력 취업 연결.</div>
       </div>
     </div>
+    <div class="fn a a4">출처: Microsoft Local 공식 페이지 (netherlands-community-investments)</div>
+  </div>
+</div>
 
-    <div class="a a4" style="display:flex;align-items:center;justify-content:space-between;padding-top:20px;border-top:1px solid var(--ink-5);margin-top:auto;">
-      <span style="font-size:12px;color:var(--ink-3);">Microsoft Netherlands · 2026 Study Visit</span>
-      <div class="logo" style="width:20px;height:20px;"><span class="r"></span><span class="g"></span><span class="b"></span><span class="y"></span></div>
+<!-- ════════════════════════════════
+  18 — 현안 + Takeaway
+════════════════════════════════ -->
+<div class="slide" id="s18">
+  <div class="ct">
+    <span class="stag">Key Takeaway</span>
+    <div class="eyebrow a">빛과 그림자 · 결론</div>
+    <div class="a a2 col2" style="flex:1;gap:48px;align-items:start;">
+      <div>
+        <div class="ct-title" style="margin-bottom:24px;font-size:clamp(28px,3.5vw,44px);">기술의 편리함 뒤에<br>따라오는 <span style="color:#C0143C;">과제</span></div>
+        <div style="display:flex;flex-direction:column;gap:0;">
+          <div class="row-item">
+            <span class="row-num">01</span>
+            <div>
+              <div class="item-title" style="font-size:17px;margin-bottom:5px;">전력망 과부하</div>
+              <div class="item-body" style="font-size:15px;">건설 금지에도 짓는다. Haarlem 전체 가구 소비량에 맞먹는 전력.</div>
+            </div>
+          </div>
+          <div class="row-item">
+            <span class="row-num">02</span>
+            <div>
+              <div class="item-title" style="font-size:17px;margin-bottom:5px;">디지털 주권 논쟁</div>
+              <div class="item-body" style="font-size:15px;">"유럽 안에 저장" = 진짜 주권인가? 운영사는 미국 기업.</div>
+            </div>
+          </div>
+          <div class="row-item" style="border-bottom:none;">
+            <span class="row-num">03</span>
+            <div>
+              <div class="item-title" style="font-size:17px;margin-bottom:5px;">EU AI Act 대응</div>
+              <div class="item-body" style="font-size:15px;">2024년 8월 발효, 2026년 중반 주요 조항 적용.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="a a3">
+        <div class="ct-title" style="margin-bottom:24px;font-size:clamp(28px,3.5vw,44px);"><span class="blue">"기술의 힘"</span>과<br>"책임"을 함께<br>말하는 기업</div>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div style="display:flex;gap:14px;padding:14px;background:var(--ink5);border-radius:8px;align-items:flex-start;">
+            <span style="font-size:18px;flex-shrink:0;">☁️</span>
+            <div><div style="font-weight:700;font-size:15px;margin-bottom:2px;">유럽 최대 클라우드 허브</div><div style="font-size:13px;color:var(--ink3);">AMS-IX · 300MW</div></div>
+          </div>
+          <div style="display:flex;gap:14px;padding:14px;background:var(--ink5);border-radius:8px;align-items:flex-start;">
+            <span style="font-size:18px;flex-shrink:0;">🌱</span>
+            <div><div style="font-weight:700;font-size:15px;margin-bottom:2px;">지속가능성 선도</div><div style="font-size:13px;color:var(--ink3);">재생에너지 100% · Circular Center 원조</div></div>
+          </div>
+          <div style="display:flex;gap:14px;padding:14px;background:var(--blue-dim);border:1px solid var(--blue);border-radius:8px;align-items:flex-start;">
+            <span style="font-size:18px;flex-shrink:0;">🏢</span>
+            <div><div style="font-weight:700;font-size:15px;margin-bottom:2px;color:var(--blue);">오픈 이노베이션 공간</div><div style="font-size:13px;color:var(--blue);">9,000㎡ 중 7,000㎡ 개방</div></div>
+          </div>
+        </div>
+        <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--ink5);display:flex;align-items:center;justify-content:space-between;">
+          <span style="font-size:12px;color:var(--ink3);">Microsoft Netherlands · 2026 Study Visit</span>
+          <div class="logo" style="width:18px;height:18px;"><span class="lr"></span><span class="lg"></span><span class="lb"></span><span class="ly"></span></div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -634,12 +714,12 @@ html, body {
 
 <div id="nav">
   <button class="nb" id="bp">&#8592;</button>
-  <span id="ctr" class="mono">01 / 15</span>
+  <span id="ctr" class="mono">01 / 18</span>
   <button class="nb" id="bn">&#8594;</button>
 </div>
 
 <script>
-const T = 15;
+const T = 18;
 let c = 1, busy = false;
 const ss = i => document.getElementById('s' + i);
 const bar = document.getElementById('bar');
@@ -651,11 +731,11 @@ function go(n) {
   const from = ss(c), to = ss(n);
   to.querySelectorAll('.a').forEach(el => { el.style.animation='none'; el.offsetHeight; el.style.animation=''; });
   from.classList.add('exit'); from.classList.remove('active');
-  to.style.transform = 'translateY(20px)'; to.style.opacity = '0';
+  to.style.transform = 'translateY(18px)'; to.style.opacity = '0';
   to.classList.add('active');
   requestAnimationFrame(() => requestAnimationFrame(() => {
     to.style.transform = ''; to.style.opacity = '';
-    setTimeout(() => { from.classList.remove('exit'); busy = false; }, 520);
+    setTimeout(() => { from.classList.remove('exit'); busy = false; }, 500);
   }));
   c = n;
   ctr.textContent = String(c).padStart(2,'0') + ' / ' + String(T).padStart(2,'0');
