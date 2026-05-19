@@ -15,12 +15,21 @@ html, body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* ── VIDEO BG ─────────────────────── */
-#bg-video {
-  position: fixed; inset: 0;
-  width: 100%; height: 100%;
-  object-fit: cover;
-  z-index: 0;
+/* ── YOUTUBE BG ─────────────────────── */
+#yt-wrap {
+  position: fixed; inset: 0; z-index: 0;
+  overflow: hidden; pointer-events: none;
+}
+#yt-wrap iframe {
+  position: absolute;
+  top: 50%; left: 50%;
+  /* 16:9 cover technique */
+  width: 100vw;
+  height: 56.25vw;   /* 16:9 */
+  min-height: 100vh;
+  min-width: 177.78vh; /* 100/56.25 */
+  transform: translate(-50%, -50%);
+  border: none;
 }
 
 /* ── OVERLAY ─────────────────────── */
@@ -28,190 +37,245 @@ html, body {
   position: fixed; inset: 0; z-index: 1;
   background: linear-gradient(
     160deg,
-    rgba(5, 14, 31, 0.82) 0%,
-    rgba(5, 14, 31, 0.65) 50%,
-    rgba(0, 40, 120, 0.45) 100%
+    rgba(3, 8, 20, 0.88) 0%,
+    rgba(5, 14, 31, 0.72) 45%,
+    rgba(0, 30, 100, 0.55) 100%
   );
-  animation: overlayIn 1.8s ease forwards;
+  animation: overlayIn 2s ease forwards;
 }
 @keyframes overlayIn {
   from { opacity: 0; }
   to   { opacity: 1; }
 }
 
-/* ── CONTENT ─────────────────────── */
+/* bottom gradient */
+#bottom-grad {
+  position: fixed; bottom: 0; left: 0; right: 0; height: 220px;
+  background: linear-gradient(to top, rgba(3,8,20,0.95) 0%, transparent 100%);
+  z-index: 2; pointer-events: none;
+}
+
+/* ── LOGO (top-left) ───────────── */
+#ms-logo {
+  position: fixed; top: 32px; left: 40px; z-index: 4;
+  display: flex; align-items: center; gap: 10px;
+  opacity: 0;
+  animation: fadeDown 0.7s ease 0.3s forwards;
+}
+.logo-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 2.5px;
+  width: 18px; height: 18px;
+}
+.logo-grid span { border-radius: 1px; }
+.lr{background:#F25022;} .lg{background:#7FBA00;} .lb{background:#00A4EF;} .ly{background:#FFB900;}
+#ms-logo .name {
+  font-size: 13px; font-weight: 500;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: .07em;
+}
+
+/* year badge (top-right) */
+#year-badge {
+  position: fixed; top: 32px; right: 40px; z-index: 4;
+  font-size: 12px; font-weight: 500; letter-spacing: .16em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.28);
+  opacity: 0;
+  animation: fadeDown 0.7s ease 0.3s forwards;
+}
+
+/* ── MAIN CONTENT ─────────────────── */
 #content {
-  position: fixed; inset: 0; z-index: 2;
+  position: fixed; inset: 0; z-index: 3;
   display: flex; flex-direction: column;
   align-items: center; justify-content: center;
-  padding: 60px 40px 100px;
+  padding: 80px 40px 140px;
   text-align: center;
   gap: 0;
 }
 
-/* Microsoft label */
-#label {
-  font-size: clamp(14px, 1.4vw, 18px);
+/* eyebrow */
+#eyebrow {
+  font-size: clamp(11px, 1.1vw, 14px);
   font-weight: 500;
-  letter-spacing: .35em;
+  letter-spacing: .42em;
   text-transform: uppercase;
   color: #5B9BFF;
-  margin-bottom: 20px;
+  margin-bottom: 28px;
   opacity: 0;
-  transform: translateY(-24px);
-  animation: slideDown 0.7s cubic-bezier(.22,1,.36,1) 0.6s forwards;
+  transform: translateY(-20px);
+  animation: fadeDown 0.7s cubic-bezier(.22,1,.36,1) 0.7s forwards;
 }
 
-/* Netherlands title — each letter is a span */
+/* big title — each char animated */
 #title {
-  font-size: clamp(64px, 11vw, 152px);
-  font-weight: 700;
-  line-height: 1;
+  font-size: clamp(72px, 12vw, 170px);
+  font-weight: 800;
+  line-height: 0.95;
   letter-spacing: -.04em;
   color: #fff;
-  margin-bottom: 28px;
+  margin-bottom: 32px;
   display: flex; flex-wrap: wrap; justify-content: center;
 }
 #title .char {
   display: inline-block;
   opacity: 0;
-  transform: translateY(-60px);
-  animation: charDrop 0.6s cubic-bezier(.22,1,.36,1) forwards;
+  transform: translateY(-70px);
+  animation: charDrop 0.55s cubic-bezier(.22,1,.36,1) forwards;
 }
 
-/* Tagline */
+/* divider line */
+#divider {
+  width: 0; height: 1px;
+  background: rgba(91,155,255,0.4);
+  margin: 0 auto 28px;
+  animation: lineGrow 0.8s ease 2.4s forwards;
+}
+@keyframes lineGrow {
+  to { width: 80px; }
+}
+
+/* tagline */
 #tagline {
-  font-size: clamp(15px, 1.5vw, 20px);
+  font-size: clamp(14px, 1.35vw, 18px);
   font-weight: 400;
-  color: rgba(255, 255, 255, 0.55);
-  letter-spacing: .02em;
-  line-height: 1.7;
-  max-width: 480px;
+  color: rgba(255, 255, 255, 0.45);
+  letter-spacing: .03em;
+  line-height: 1.8;
+  max-width: 440px;
   opacity: 0;
-  transform: translateY(16px);
-  animation: fadeUp 0.8s ease 2.1s forwards;
+  transform: translateY(14px);
+  animation: fadeUp 0.9s ease 2.6s forwards;
 }
 
-/* Start button */
+/* ── START BUTTON ─────────────────── */
 #start-wrap {
   position: fixed;
-  bottom: 48px; left: 0; right: 0;
+  bottom: 52px; left: 0; right: 0;
   display: flex; justify-content: center;
-  z-index: 2;
+  z-index: 3;
   opacity: 0;
-  transform: translateY(20px);
-  animation: fadeUp 0.8s ease 2.5s forwards;
+  transform: translateY(18px);
+  animation: fadeUp 0.8s ease 3.0s forwards;
 }
 #start-btn {
-  display: inline-flex; align-items: center; gap: 10px;
-  padding: 16px 44px;
-  background: #0057FF;
+  display: inline-flex; align-items: center; gap: 12px;
+  padding: 18px 52px;
+  background: transparent;
   color: #fff;
   font-family: 'Pretendard', sans-serif;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 600;
-  letter-spacing: .08em;
-  border: none; border-radius: 50px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  border: 1px solid rgba(255,255,255,0.28);
+  border-radius: 50px;
   cursor: pointer;
   text-decoration: none;
-  transition: background .2s, transform .2s, box-shadow .2s;
-  box-shadow: 0 0 32px rgba(0, 87, 255, 0.4);
+  transition: background .25s, border-color .25s, transform .2s, box-shadow .25s;
 }
 #start-btn:hover {
-  background: #1a6dff;
+  background: rgba(0, 87, 255, 0.18);
+  border-color: rgba(91,155,255,0.7);
+  box-shadow: 0 0 40px rgba(0, 87, 255, 0.25);
   transform: translateY(-2px);
-  box-shadow: 0 0 48px rgba(0, 87, 255, 0.6);
 }
 #start-btn:active { transform: translateY(0); }
-
 #start-btn .arrow {
   display: inline-block;
+  font-size: 16px;
   transition: transform .2s;
 }
 #start-btn:hover .arrow { transform: translateX(5px); }
 
-/* ── TRANSITION OUT ───────────────── */
+/* scroll hint */
+#scroll-hint {
+  position: fixed; bottom: 18px; left: 50%; transform: translateX(-50%);
+  z-index: 3;
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease 3.4s forwards;
+}
+#scroll-hint span {
+  font-size: 10px; letter-spacing: .2em; text-transform: uppercase;
+  color: rgba(255,255,255,0.2); font-weight: 400;
+}
+.scroll-dot {
+  width: 4px; height: 4px; border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  animation: dotPulse 2s ease-in-out 3.4s infinite;
+}
+@keyframes dotPulse {
+  0%,100% { opacity: 0.2; transform: scaleX(1); }
+  50%      { opacity: 0.6; transform: scaleY(1.4); }
+}
+
+/* ── TRANSITION CURTAIN ───────────── */
 #curtain {
   position: fixed; inset: 0; z-index: 99;
   background: #050e1f;
   opacity: 0; pointer-events: none;
-  transition: opacity 0.7s cubic-bezier(.4,0,.2,1);
+  transition: opacity 0.75s cubic-bezier(.4,0,.2,1);
 }
 #curtain.on { opacity: 1; pointer-events: all; }
 
 /* ── KEYFRAMES ────────────────────── */
-@keyframes slideDown {
+@keyframes fadeDown {
   to { opacity: 1; transform: translateY(0); }
 }
 @keyframes charDrop {
   to { opacity: 1; transform: translateY(0); }
 }
 @keyframes fadeUp {
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* ── BOTTOM GRADIENT ──────────────── */
-#bottom-grad {
-  position: fixed; bottom: 0; left: 0; right: 0; height: 180px;
-  background: linear-gradient(to top, rgba(5,14,31,0.85) 0%, transparent 100%);
-  z-index: 1; pointer-events: none;
-}
-
-/* ── LOGO MS (top-left) ───────────── */
-#ms-logo {
-  position: fixed; top: 28px; left: 36px; z-index: 3;
-  display: flex; align-items: center; gap: 8px;
-  opacity: 0;
-  animation: slideDown 0.6s ease 0.3s forwards;
-}
-.logo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; width: 16px; height: 16px; }
-.logo-grid span { border-radius: 1px; }
-.lr{background:#F25022;} .lg{background:#7FBA00;} .lb{background:#00A4EF;} .ly{background:#FFB900;}
-#ms-logo span.name {
-  font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.5);
-  letter-spacing: .06em;
-}
-
-/* year badge top-right */
-#year-badge {
-  position: fixed; top: 28px; right: 36px; z-index: 3;
-  font-size: 12px; font-weight: 500; letter-spacing: .14em;
-  color: rgba(255,255,255,0.3);
-  opacity: 0;
-  animation: slideDown 0.6s ease 0.3s forwards;
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 </style>
 </head>
 <body>
 
-<!-- Background video -->
-<video id="bg-video" autoplay muted loop playsinline>
-  <source src="skyline.mp4" type="video/mp4">
-</video>
+<!-- YouTube background -->
+<div id="yt-wrap">
+  <iframe
+    src="https://www.youtube.com/embed/NUYaQ0nruoQ?autoplay=1&mute=1&loop=1&playlist=NUYaQ0nruoQ&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&disablekb=1&fs=0&playsinline=1"
+    allow="autoplay; encrypted-media"
+    allowfullscreen
+  ></iframe>
+</div>
 
-<!-- Dark overlay -->
+<!-- Overlays -->
 <div id="overlay"></div>
 <div id="bottom-grad"></div>
 
 <!-- Top UI -->
 <div id="ms-logo">
-  <div class="logo-grid"><span class="lr"></span><span class="lg"></span><span class="lb"></span><span class="ly"></span></div>
+  <div class="logo-grid">
+    <span class="lr"></span><span class="lg"></span>
+    <span class="lb"></span><span class="ly"></span>
+  </div>
   <span class="name">Microsoft</span>
 </div>
 <div id="year-badge">2026 Study Visit</div>
 
 <!-- Main content -->
 <div id="content">
-  <div id="label">Microsoft</div>
+  <div id="eyebrow">Microsoft Netherlands</div>
   <h1 id="title"></h1>
+  <div id="divider"></div>
   <p id="tagline">유럽 클라우드 인프라의 심장부<br>AI · 환경 · 디지털 주권까지 해부한다</p>
 </div>
 
 <!-- Start button -->
 <div id="start-wrap">
   <button id="start-btn" onclick="startPresentation()">
-    Start <span class="arrow">→</span>
+    Explore <span class="arrow">→</span>
   </button>
+</div>
+
+<!-- Scroll hint -->
+<div id="scroll-hint">
+  <div class="scroll-dot"></div>
+  <span>Press Enter</span>
 </div>
 
 <!-- Transition curtain -->
@@ -219,28 +283,26 @@ html, body {
 
 <script>
 // Netherlands 글자 하나씩 떨어지는 애니메이션
-const title = document.getElementById('title');
+const titleEl = document.getElementById('title');
 const word = 'Netherlands';
-const baseDelay = 0.9; // seconds
+const baseDelay = 1.0;
 
 word.split('').forEach((ch, i) => {
   const span = document.createElement('span');
   span.classList.add('char');
   span.textContent = ch;
-  span.style.animationDelay = (baseDelay + i * 0.07) + 's';
-  title.appendChild(span);
+  span.style.animationDelay = (baseDelay + i * 0.065) + 's';
+  titleEl.appendChild(span);
 });
 
-// Start 버튼 → slides.html로 페이드 전환
+// 페이드 전환 후 slides.html로 이동
 function startPresentation() {
   const curtain = document.getElementById('curtain');
   curtain.classList.add('on');
-  setTimeout(() => {
-    window.location.href = 'slides.html';
-  }, 700);
+  setTimeout(() => { window.location.href = 'slides.html'; }, 750);
 }
 
-// 스페이스바 / 엔터로도 시작
+// 스페이스 / 엔터 단축키
 document.addEventListener('keydown', e => {
   if (e.key === ' ' || e.key === 'Enter') {
     e.preventDefault();
