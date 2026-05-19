@@ -39,7 +39,7 @@ html, body {
 .slide.active { opacity:1; pointer-events:all; transform:none; }
 .slide.exit   { opacity:0; transform:translateY(-16px); pointer-events:none; }
 #bar { position:fixed; top:0; left:0; height:2px; background:var(--blue); transition:width .4s ease; z-index:99; }
-#nav { position:fixed; bottom:24px; right:28px; display:flex; align-items:center; gap:10px; z-index:99; }
+#nav { position:fixed; bottom:24px; left:28px; display:flex; align-items:center; gap:10px; z-index:99; }
 .nb {
   width:34px; height:34px; border-radius:50%;
   border:1.5px solid var(--ink4); background:var(--white);
@@ -73,9 +73,9 @@ html, body {
 .chip-b { background:var(--blue-dim); color:var(--blue); }
 .chip-r { background:#FFF0F2; color:#C0143C; }
 
-.ct { flex:1; display:flex; flex-direction:column; padding:44px 72px; position:relative; }
+.ct { flex:1; display:flex; flex-direction:column; padding:30px 52px; position:relative; }
 .eyebrow {
-  font-size:11px; font-weight:600; letter-spacing:.2em;
+  font-size:13px; font-weight:600; letter-spacing:.2em;
   text-transform:uppercase; color:var(--blue);
   margin-bottom:10px; display:flex; align-items:center; gap:8px; flex-shrink:0;
 }
@@ -84,20 +84,26 @@ html, body {
   font-size:clamp(28px,3.8vw,50px);
   font-weight:800; line-height:1.05; letter-spacing:-.035em; flex-shrink:0;
 }
-.body { font-size:clamp(15px,1.55vw,20px); line-height:1.75; color:var(--ink2); }
-.body-lg { font-size:clamp(17px,1.8vw,23px); line-height:1.65; color:var(--ink2); }
-.item-title { font-size:clamp(15px,1.5vw,19px); font-weight:700; margin-bottom:5px; }
-.item-body  { font-size:clamp(13px,1.3vw,16px); line-height:1.65; color:var(--ink2); }
+.body { font-size:clamp(17px,1.7vw,22px); line-height:1.75; color:var(--ink2); }
+.body-lg { font-size:clamp(19px,1.9vw,25px); line-height:1.65; color:var(--ink2); }
+.item-title { font-size:clamp(17px,1.6vw,21px); font-weight:700; margin-bottom:5px; }
+.item-body  { font-size:clamp(15px,1.45vw,18px); line-height:1.65; color:var(--ink2); }
 .stat-n { font-size:clamp(40px,5.5vw,70px); font-weight:800; line-height:1; letter-spacing:-.045em; color:var(--blue); }
-.stat-l { font-size:clamp(11px,1vw,13px); color:var(--ink3); margin-top:4px; }
-.fn { font-size:10px; color:var(--ink4); border-top:1px solid var(--ink5); padding-top:10px; margin-top:auto; flex-shrink:0; }
-.stag { position:absolute; top:22px; right:28px; font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--ink4); letter-spacing:.12em; text-transform:uppercase; }
-.pull { border-left:2.5px solid var(--blue); padding:12px 18px; font-size:clamp(14px,1.4vw,17px); color:var(--ink2); line-height:1.7; font-style:italic; background:var(--blue-dim); border-radius:0 8px 8px 0; }
+.stat-l { font-size:clamp(13px,1.1vw,15px); color:var(--ink3); margin-top:4px; }
+.fn { font-size:12px; color:var(--ink4); border-top:1px solid var(--ink5); padding-top:10px; margin-top:auto; flex-shrink:0; }
+.stag { position:absolute; top:22px; right:28px; font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--ink4); letter-spacing:.12em; text-transform:uppercase; }
+.pull { border-left:2.5px solid var(--blue); padding:12px 18px; font-size:clamp(15px,1.5vw,19px); color:var(--ink2); line-height:1.7; font-style:italic; background:var(--blue-dim); border-radius:0 8px 8px 0; }
 .col2 { display:grid; grid-template-columns:1fr 1fr; gap:44px; }
 .col3 { display:grid; grid-template-columns:repeat(3,1fr); }
 .row-item { display:flex; gap:18px; align-items:flex-start; padding:16px 0; border-bottom:1px solid var(--ink5); }
 .row-item:last-child { border-bottom:none; }
-.row-num { font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--blue); font-weight:500; padding-top:2px; flex-shrink:0; width:22px; }
+.row-num { font-family:'IBM Plex Mono',monospace; font-size:13px; color:var(--blue); font-weight:500; padding-top:2px; flex-shrink:0; width:22px; }
+#slide-num {
+  position:fixed; bottom:16px; right:20px;
+  font-family:'IBM Plex Mono',monospace; font-size:11px;
+  color:var(--ink4); letter-spacing:.1em; z-index:100; pointer-events:none;
+}
+#slide-num.dark { color:rgba(255,255,255,0.3); }
 </style>
 </head>
 <body>
@@ -778,6 +784,7 @@ html, body {
   <span id="ctr" class="mono">01 / 18</span>
   <button class="nb" id="bn">&#8594;</button>
 </div>
+<div id="slide-num">01 / 18</div>
 
 <script>
 const T = 18;
@@ -790,14 +797,15 @@ function isDark(n) {
   return [1, 3, 5, 7, 9, 12, 15].includes(n);
 }
 function updateNav(n) {
-  const nav = document.getElementById('nav');
+  const nav = document.getElementById('nav') || document.getElementById('nav-dark');
   if (isDark(n)) {
     nav.id = 'nav-dark';
   } else {
     nav.id = 'nav';
   }
-  // update bar color
   bar.style.background = isDark(n) ? 'rgba(91,155,255,0.7)' : 'var(--blue)';
+  const sn = document.getElementById('slide-num');
+  if (isDark(n)) sn.classList.add('dark'); else sn.classList.remove('dark');
 }
 
 function go(n) {
@@ -813,7 +821,9 @@ function go(n) {
     setTimeout(() => { from.classList.remove('exit'); busy = false; }, 500);
   }));
   c = n;
-  ctr.textContent = String(c).padStart(2,'0') + ' / ' + String(T).padStart(2,'0');
+  const label = String(c).padStart(2,'0') + ' / ' + String(T).padStart(2,'0');
+  ctr.textContent = label;
+  document.getElementById('slide-num').textContent = label;
   bar.style.width = (c / T * 100) + '%';
   updateNav(c);
 }
