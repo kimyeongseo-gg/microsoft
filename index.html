@@ -19,15 +19,16 @@ html, body {
 #yt-wrap {
   position: fixed; inset: 0; z-index: 0;
   overflow: hidden; pointer-events: none;
+  background: #050e1f;
 }
+/* YouTube IFrame API가 여기에 iframe을 주입함 */
 #yt-wrap iframe {
   position: absolute;
   top: 50%; left: 50%;
-  /* 16:9 cover technique */
   width: 100vw;
-  height: 56.25vw;   /* 16:9 */
+  height: 56.25vw;
   min-height: 100vh;
-  min-width: 177.78vh; /* 100/56.25 */
+  min-width: 177.78vh;
   transform: translate(-50%, -50%);
   border: none;
 }
@@ -37,44 +38,32 @@ html, body {
   position: fixed; inset: 0; z-index: 1;
   background: linear-gradient(
     160deg,
-    rgba(3, 8, 20, 0.88) 0%,
-    rgba(5, 14, 31, 0.72) 45%,
-    rgba(0, 30, 100, 0.55) 100%
+    rgba(3, 8, 20, 0.85) 0%,
+    rgba(5, 14, 31, 0.68) 45%,
+    rgba(0, 30, 100, 0.52) 100%
   );
   animation: overlayIn 2s ease forwards;
 }
-@keyframes overlayIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
-}
+@keyframes overlayIn { from { opacity: 0; } to { opacity: 1; } }
 
-/* bottom gradient */
 #bottom-grad {
   position: fixed; bottom: 0; left: 0; right: 0; height: 220px;
   background: linear-gradient(to top, rgba(3,8,20,0.95) 0%, transparent 100%);
   z-index: 2; pointer-events: none;
 }
 
-/* ── LOGO (top-left) ───────────── */
+/* ── TOP UI ─────────────────────── */
 #ms-logo {
   position: fixed; top: 32px; left: 40px; z-index: 4;
   display: flex; align-items: center; gap: 10px;
   opacity: 0;
   animation: fadeDown 0.7s ease 0.3s forwards;
 }
-.logo-grid {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 2.5px;
-  width: 18px; height: 18px;
-}
+.logo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5px; width: 18px; height: 18px; }
 .logo-grid span { border-radius: 1px; }
 .lr{background:#F25022;} .lg{background:#7FBA00;} .lb{background:#00A4EF;} .ly{background:#FFB900;}
-#ms-logo .name {
-  font-size: 13px; font-weight: 500;
-  color: rgba(255,255,255,0.5);
-  letter-spacing: .07em;
-}
+#ms-logo .name { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.5); letter-spacing: .07em; }
 
-/* year badge (top-right) */
 #year-badge {
   position: fixed; top: 32px; right: 40px; z-index: 4;
   font-size: 12px; font-weight: 500; letter-spacing: .16em;
@@ -91,10 +80,8 @@ html, body {
   align-items: center; justify-content: center;
   padding: 80px 40px 140px;
   text-align: center;
-  gap: 0;
 }
 
-/* eyebrow */
 #eyebrow {
   font-size: clamp(11px, 1.1vw, 14px);
   font-weight: 500;
@@ -103,11 +90,9 @@ html, body {
   color: #5B9BFF;
   margin-bottom: 28px;
   opacity: 0;
-  transform: translateY(-20px);
   animation: fadeDown 0.7s cubic-bezier(.22,1,.36,1) 0.7s forwards;
 }
 
-/* big title — each char animated */
 #title {
   font-size: clamp(72px, 12vw, 170px);
   font-weight: 800;
@@ -124,27 +109,22 @@ html, body {
   animation: charDrop 0.55s cubic-bezier(.22,1,.36,1) forwards;
 }
 
-/* divider line */
 #divider {
   width: 0; height: 1px;
   background: rgba(91,155,255,0.4);
   margin: 0 auto 28px;
   animation: lineGrow 0.8s ease 2.4s forwards;
 }
-@keyframes lineGrow {
-  to { width: 80px; }
-}
+@keyframes lineGrow { to { width: 80px; } }
 
-/* tagline */
 #tagline {
   font-size: clamp(14px, 1.35vw, 18px);
   font-weight: 400;
-  color: rgba(255, 255, 255, 0.45);
+  color: rgba(255,255,255,0.45);
   letter-spacing: .03em;
   line-height: 1.8;
   max-width: 440px;
   opacity: 0;
-  transform: translateY(14px);
   animation: fadeUp 0.9s ease 2.6s forwards;
 }
 
@@ -155,7 +135,6 @@ html, body {
   display: flex; justify-content: center;
   z-index: 3;
   opacity: 0;
-  transform: translateY(18px);
   animation: fadeUp 0.8s ease 3.0s forwards;
 }
 #start-btn {
@@ -171,7 +150,6 @@ html, body {
   border: 1px solid rgba(255,255,255,0.28);
   border-radius: 50px;
   cursor: pointer;
-  text-decoration: none;
   transition: background .25s, border-color .25s, transform .2s, box-shadow .25s;
 }
 #start-btn:hover {
@@ -181,36 +159,10 @@ html, body {
   transform: translateY(-2px);
 }
 #start-btn:active { transform: translateY(0); }
-#start-btn .arrow {
-  display: inline-block;
-  font-size: 16px;
-  transition: transform .2s;
-}
+#start-btn .arrow { display: inline-block; font-size: 16px; transition: transform .2s; }
 #start-btn:hover .arrow { transform: translateX(5px); }
 
-/* scroll hint */
-#scroll-hint {
-  position: fixed; bottom: 18px; left: 50%; transform: translateX(-50%);
-  z-index: 3;
-  display: flex; flex-direction: column; align-items: center; gap: 6px;
-  opacity: 0;
-  animation: fadeUp 0.8s ease 3.4s forwards;
-}
-#scroll-hint span {
-  font-size: 10px; letter-spacing: .2em; text-transform: uppercase;
-  color: rgba(255,255,255,0.2); font-weight: 400;
-}
-.scroll-dot {
-  width: 4px; height: 4px; border-radius: 50%;
-  background: rgba(255,255,255,0.2);
-  animation: dotPulse 2s ease-in-out 3.4s infinite;
-}
-@keyframes dotPulse {
-  0%,100% { opacity: 0.2; transform: scaleX(1); }
-  50%      { opacity: 0.6; transform: scaleY(1.4); }
-}
-
-/* ── TRANSITION CURTAIN ───────────── */
+/* ── CURTAIN ─────────────────────── */
 #curtain {
   position: fixed; inset: 0; z-index: 99;
   background: #050e1f;
@@ -221,7 +173,8 @@ html, body {
 
 /* ── KEYFRAMES ────────────────────── */
 @keyframes fadeDown {
-  to { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translateY(-20px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 @keyframes charDrop {
   to { opacity: 1; transform: translateY(0); }
@@ -234,16 +187,11 @@ html, body {
 </head>
 <body>
 
-<!-- YouTube background -->
+<!-- YouTube background via IFrame API -->
 <div id="yt-wrap">
-  <iframe
-    src="https://www.youtube.com/embed/NUYaQ0nruoQ?autoplay=1&mute=1&loop=1&playlist=NUYaQ0nruoQ&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&disablekb=1&fs=0&playsinline=1"
-    allow="autoplay; encrypted-media"
-    allowfullscreen
-  ></iframe>
+  <div id="yt-player"></div>
 </div>
 
-<!-- Overlays -->
 <div id="overlay"></div>
 <div id="bottom-grad"></div>
 
@@ -272,37 +220,59 @@ html, body {
   </button>
 </div>
 
-<!-- Scroll hint -->
-<div id="scroll-hint">
-  <div class="scroll-dot"></div>
-  <span>Press Enter</span>
-</div>
-
-<!-- Transition curtain -->
 <div id="curtain"></div>
 
 <script>
-// Netherlands 글자 하나씩 떨어지는 애니메이션
+// ── Netherlands 글자 애니메이션 ──
 const titleEl = document.getElementById('title');
-const word = 'Netherlands';
-const baseDelay = 1.0;
-
-word.split('').forEach((ch, i) => {
+'Netherlands'.split('').forEach((ch, i) => {
   const span = document.createElement('span');
   span.classList.add('char');
   span.textContent = ch;
-  span.style.animationDelay = (baseDelay + i * 0.065) + 's';
+  span.style.animationDelay = (1.0 + i * 0.065) + 's';
   titleEl.appendChild(span);
 });
 
-// 페이드 전환 후 slides.html로 이동
+// ── YouTube IFrame API 로드 ──
+(function() {
+  var tag = document.createElement('script');
+  tag.src = 'https://www.youtube.com/iframe_api';
+  document.head.appendChild(tag);
+})();
+
+var ytPlayer;
+function onYouTubeIframeAPIReady() {
+  ytPlayer = new YT.Player('yt-player', {
+    videoId: 'NUYaQ0nruoQ',
+    playerVars: {
+      autoplay: 1,
+      mute:     1,
+      loop:     1,
+      playlist: 'NUYaQ0nruoQ',
+      controls: 0,
+      rel:      0,
+      showinfo: 0,
+      iv_load_policy: 3,
+      modestbranding: 1,
+      disablekb: 1,
+      fs: 0,
+      playsinline: 1
+    },
+    events: {
+      onReady: function(e) {
+        e.target.mute();
+        e.target.playVideo();
+      }
+    }
+  });
+}
+
+// ── 페이지 전환 ──
 function startPresentation() {
-  const curtain = document.getElementById('curtain');
-  curtain.classList.add('on');
+  document.getElementById('curtain').classList.add('on');
   setTimeout(() => { window.location.href = 'slides.html'; }, 750);
 }
 
-// 스페이스 / 엔터 단축키
 document.addEventListener('keydown', e => {
   if (e.key === ' ' || e.key === 'Enter') {
     e.preventDefault();
