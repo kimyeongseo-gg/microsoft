@@ -93,10 +93,12 @@ html, body {
 
 /* ── SLIDE LAYOUT ─────────────────────────── */
 .ct {
-  flex:1; display:flex; flex-direction:column;
-  align-items:center; justify-content:center;
-  padding:48px 44px 40px;
+  flex:1;
+  display:grid;
+  place-items:center;          /* 가로 + 세로 완전 중앙 */
+  padding:44px 44px 44px;
   position:relative;
+  overflow:hidden;
 }
 .stag {
   position:absolute; top:16px; right:22px;
@@ -105,22 +107,22 @@ html, body {
 }
 .ct-inner {
   max-width:1100px; width:100%;
-  display:flex; flex-direction:column; gap:12px;
+  display:flex; flex-direction:column; gap:14px;
+  align-items:stretch;
 }
 
 .eyebrow {
   font-size:11px; font-weight:600; letter-spacing:.22em;
   text-transform:uppercase; color:var(--blue);
-  margin-bottom:6px;
   display:flex; align-items:center; justify-content:center; gap:8px; flex-shrink:0;
 }
 .eyebrow::before,
 .eyebrow::after { content:''; width:16px; height:1.5px; background:var(--blue); flex-shrink:0; }
 
 .ct-title {
-  font-size:clamp(22px,3.2vw,42px);
+  font-size:clamp(26px,3.6vw,48px);
   font-weight:700; line-height:1.1; letter-spacing:-.03em; flex-shrink:0;
-  text-align:center; margin-bottom:14px;
+  text-align:center;
 }
 
 .body    { font-size:clamp(14px,1.45vw,18px); line-height:1.7; color:var(--ink2); font-weight:400; }
@@ -160,6 +162,32 @@ html, body {
 .card-water { border-color:#B2D8F5; background:#EEF8FF; }
 .card-plain { border-color:transparent; background:var(--ink5); }
 
+/* ── CHAPTER SLIDES ──────────────────────── */
+.chap {
+  flex:1; display:grid; place-items:center;
+  padding:60px 80px; position:relative; overflow:hidden; text-align:center;
+}
+.chap-bg {
+  position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+  font-size:clamp(200px,28vw,400px); font-weight:700; line-height:1; letter-spacing:-.07em;
+  color:rgba(255,255,255,0.03); user-select:none; pointer-events:none;
+}
+.chap-inner {
+  position:relative; display:flex; flex-direction:column; align-items:center; gap:16px;
+}
+.chap-label {
+  font-size:11px; font-weight:600; letter-spacing:.22em;
+  text-transform:uppercase; color:#5B9BFF;
+}
+.chap-title {
+  font-size:clamp(42px,6.5vw,90px); font-weight:700; line-height:1.02;
+  letter-spacing:-.04em; color:#fff;
+}
+.chap-sub {
+  font-size:clamp(14px,1.5vw,19px); color:rgba(255,255,255,0.55);
+  max-width:500px; line-height:1.65; font-weight:400;
+}
+
 /* ── GRIDS ────────────────────────────────── */
 .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:14px; align-items:stretch; }
 .grid3 { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; align-items:stretch; }
@@ -167,14 +195,15 @@ html, body {
 @media (max-width:960px) {
   .grid2 { grid-template-columns:1fr; }
   .grid3 { grid-template-columns:1fr 1fr; }
-  .ct { padding:40px 28px 36px; }
+  .ct { padding:36px 28px; }
   .fn { left:28px; right:28px; }
+  .chap { padding:40px 40px; }
 }
 @media (max-width:600px) {
   .grid3 { grid-template-columns:1fr; }
-  .ct-title { font-size:clamp(18px,5.5vw,30px) !important; }
-  .ct { padding:36px 20px 32px; }
-  .fn { left:20px; right:20px; }
+  .ct-title { font-size:clamp(20px,5.5vw,32px) !important; }
+  .ct { padding:28px 18px; }
+  .fn { left:18px; right:18px; }
 }
 </style>
 </head>
@@ -248,11 +277,13 @@ html, body {
   03 — CHAPTER 01
 ══════════════════════════════ -->
 <div class="slide" id="s3" style="background:var(--dark);">
-  <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:60px 80px;position:relative;overflow:hidden;">
-    <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:clamp(200px,28vw,400px);font-weight:700;line-height:1;letter-spacing:-.07em;color:rgba(255,255,255,0.03);user-select:none;pointer-events:none;">01</div>
-    <div class="a" style="font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:#5B9BFF;margin-bottom:16px;">Chapter 01</div>
-    <h2 class="a a2" style="font-size:clamp(42px,6.5vw,90px);font-weight:700;line-height:1;letter-spacing:-.04em;color:#fff;margin-bottom:24px;">마이크로소프트,<br>도대체<br><span style="color:#5B9BFF;">뭐하는 회사야?</span></h2>
-    <p class="a a3" style="font-size:clamp(14px,1.5vw,19px);color:rgba(255,255,255,0.55);max-width:460px;line-height:1.65;font-weight:400;">"디지털 세상의 인프라와 도구를 만드는 회사"</p>
+  <div class="chap">
+    <div class="chap-bg">01</div>
+    <div class="chap-inner">
+      <div class="chap-label a">Chapter 01</div>
+      <h2 class="chap-title a a2">마이크로소프트,<br>도대체<br><span style="color:#5B9BFF;">뭐하는 회사야?</span></h2>
+      <p class="chap-sub a a3">"디지털 세상의 인프라와 도구를 만드는 회사"</p>
+    </div>
   </div>
 </div>
 
@@ -309,11 +340,13 @@ html, body {
   05 — CHAPTER 02
 ══════════════════════════════ -->
 <div class="slide" id="s5" style="background:var(--dark);">
-  <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:60px 80px;position:relative;overflow:hidden;">
-    <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:clamp(200px,28vw,400px);font-weight:700;line-height:1;letter-spacing:-.07em;color:rgba(255,255,255,0.03);user-select:none;pointer-events:none;">02</div>
-    <div class="a" style="font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:#5B9BFF;margin-bottom:16px;">Chapter 02</div>
-    <h2 class="a a2" style="font-size:clamp(42px,6.5vw,90px);font-weight:700;line-height:1;letter-spacing:-.04em;color:#fff;margin-bottom:24px;">왜 하필<br><span style="color:#5B9BFF;">네덜란드</span>인가?</h2>
-    <p class="a a3" style="font-size:clamp(14px,1.5vw,19px);color:rgba(255,255,255,0.55);max-width:480px;line-height:1.65;font-weight:400;">"네덜란드는 유럽 디지털 산업의 중심지 역할을 한다"</p>
+  <div class="chap">
+    <div class="chap-bg">02</div>
+    <div class="chap-inner">
+      <div class="chap-label a">Chapter 02</div>
+      <h2 class="chap-title a a2">왜 하필<br><span style="color:#5B9BFF;">네덜란드</span>인가?</h2>
+      <p class="chap-sub a a3">"네덜란드는 유럽 디지털 산업의 중심지 역할을 한다"</p>
+    </div>
   </div>
 </div>
 
@@ -367,11 +400,13 @@ html, body {
   07 — CHAPTER 03
 ══════════════════════════════ -->
 <div class="slide" id="s7" style="background:var(--dark);">
-  <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:60px 80px;position:relative;overflow:hidden;">
-    <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:clamp(200px,28vw,400px);font-weight:700;line-height:1;letter-spacing:-.07em;color:rgba(255,255,255,0.03);user-select:none;pointer-events:none;">03</div>
-    <div class="a" style="font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:#5B9BFF;margin-bottom:16px;">Chapter 03</div>
-    <h2 class="a a2" style="font-size:clamp(42px,6.5vw,90px);font-weight:700;line-height:1;letter-spacing:-.04em;color:#fff;margin-bottom:24px;">Microsoft<br>Netherlands<br><span style="color:#5B9BFF;">어떤 곳인가?</span></h2>
-    <p class="a a3" style="font-size:clamp(14px,1.5vw,19px);color:rgba(255,255,255,0.55);max-width:480px;line-height:1.65;font-weight:400;">36년 역사 · 1,000명+ · 오픈 이노베이션 허브</p>
+  <div class="chap">
+    <div class="chap-bg">03</div>
+    <div class="chap-inner">
+      <div class="chap-label a">Chapter 03</div>
+      <h2 class="chap-title a a2">Microsoft<br>Netherlands<br><span style="color:#5B9BFF;">어떤 곳인가?</span></h2>
+      <p class="chap-sub a a3">36년 역사 · 1,000명+ · 오픈 이노베이션 허브</p>
+    </div>
   </div>
 </div>
 
@@ -439,11 +474,13 @@ html, body {
   09 — CHAPTER 04
 ══════════════════════════════ -->
 <div class="slide" id="s9" style="background:var(--dark);">
-  <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:60px 80px;position:relative;overflow:hidden;">
-    <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:clamp(200px,28vw,400px);font-weight:700;line-height:1;letter-spacing:-.07em;color:rgba(255,255,255,0.03);user-select:none;pointer-events:none;">04</div>
-    <div class="a" style="font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:#5B9BFF;margin-bottom:16px;">Chapter 04</div>
-    <h2 class="a a2" style="font-size:clamp(42px,6.5vw,90px);font-weight:700;line-height:1;letter-spacing:-.04em;color:#fff;margin-bottom:24px;">Microsoft의<br><span style="color:#5B9BFF;">핵심 사업</span></h2>
-    <p class="a a3" style="font-size:clamp(14px,1.5vw,19px);color:rgba(255,255,255,0.55);max-width:480px;line-height:1.65;font-weight:400;">☁️ 클라우드  ·  🤖 AI  ·  🌱 환경 지속가능성</p>
+  <div class="chap">
+    <div class="chap-bg">04</div>
+    <div class="chap-inner">
+      <div class="chap-label a">Chapter 04</div>
+      <h2 class="chap-title a a2">Microsoft의<br><span style="color:#5B9BFF;">핵심 사업</span></h2>
+      <p class="chap-sub a a3">☁️ 클라우드  ·  🤖 AI  ·  🌱 환경 지속가능성</p>
+    </div>
   </div>
 </div>
 
@@ -683,11 +720,13 @@ html, body {
   15 — CHAPTER 06
 ══════════════════════════════ -->
 <div class="slide" id="s15" style="background:var(--dark);">
-  <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:60px 80px;position:relative;overflow:hidden;">
-    <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:clamp(200px,28vw,400px);font-weight:700;line-height:1;letter-spacing:-.07em;color:rgba(255,255,255,0.03);user-select:none;pointer-events:none;">06</div>
-    <div class="a" style="font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:#5B9BFF;margin-bottom:16px;">Chapter 06</div>
-    <h2 class="a a2" style="font-size:clamp(38px,5.8vw,80px);font-weight:700;line-height:1;letter-spacing:-.04em;color:#fff;margin-bottom:24px;">우리 전공과<br>Microsoft는<br><span style="color:#5B9BFF;">어떻게 연결될까?</span></h2>
-    <p class="a a3" style="font-size:clamp(14px,1.5vw,19px);color:rgba(255,255,255,0.55);max-width:480px;line-height:1.65;font-weight:400;">전공 연계 시사점 · 방문 전 심화 질문 · 팀 역량</p>
+  <div class="chap">
+    <div class="chap-bg">06</div>
+    <div class="chap-inner">
+      <div class="chap-label a">Chapter 06</div>
+      <h2 class="chap-title a a2">우리 전공과<br>Microsoft는<br><span style="color:#5B9BFF;">어떻게 연결될까?</span></h2>
+      <p class="chap-sub a a3">전공 연계 시사점 · 방문 전 심화 질문 · 팀 역량</p>
+    </div>
   </div>
 </div>
 
