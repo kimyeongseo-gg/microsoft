@@ -25,10 +25,11 @@ html, body {
 #yt-wrap iframe {
   position: absolute;
   top: 50%; left: 50%;
-  width: 100vw;
-  height: 56.25vw;
-  min-height: 100vh;
-  min-width: 177.78vh;
+  /* 상하 100px 크게 만들어 YouTube 컨트롤 바를 overflow:hidden으로 잘라냄 */
+  width: calc(100vw + 4px);
+  height: calc(56.25vw + 100px);
+  min-height: calc(100vh + 100px);
+  min-width: calc(177.78vh + 4px);
   transform: translate(-50%, -50%);
   border: none;
 }
@@ -38,9 +39,9 @@ html, body {
   position: fixed; inset: 0; z-index: 1;
   background: linear-gradient(
     160deg,
-    rgba(3, 8, 20, 0.85) 0%,
-    rgba(5, 14, 31, 0.68) 45%,
-    rgba(0, 30, 100, 0.52) 100%
+    rgba(3, 8, 20, 0.60) 0%,
+    rgba(5, 14, 31, 0.42) 45%,
+    rgba(0, 30, 100, 0.30) 100%
   );
   animation: overlayIn 2s ease forwards;
 }
