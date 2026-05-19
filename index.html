@@ -94,7 +94,8 @@ html, body {
 /* ── SLIDE LAYOUT ─────────────────────────── */
 .ct {
   flex:1; display:flex; flex-direction:column;
-  align-items:center; padding:18px 40px 12px;
+  align-items:center; justify-content:center;
+  padding:48px 44px 40px;
   position:relative;
 }
 .stag {
@@ -103,8 +104,8 @@ html, body {
   color:var(--ink4); letter-spacing:.12em; text-transform:uppercase;
 }
 .ct-inner {
-  max-width:1160px; width:100%; flex:1;
-  display:flex; flex-direction:column;
+  max-width:1100px; width:100%;
+  display:flex; flex-direction:column; gap:12px;
 }
 
 .eyebrow {
@@ -130,9 +131,10 @@ html, body {
 .stat-l { font-size:clamp(11px,0.95vw,13px); color:var(--ink3); margin-top:3px; font-weight:400; }
 
 .fn {
+  position:absolute; bottom:12px; left:44px; right:44px;
   font-size:11px; font-weight:400; color:var(--ink4);
-  border-top:1px solid var(--ink5); padding-top:7px; margin-top:8px;
-  flex-shrink:0; text-align:center; width:100%;
+  border-top:1px solid var(--ink5); padding-top:7px;
+  text-align:center;
 }
 .pull {
   border-left:2.5px solid var(--blue); padding:9px 14px;
@@ -165,11 +167,14 @@ html, body {
 @media (max-width:960px) {
   .grid2 { grid-template-columns:1fr; }
   .grid3 { grid-template-columns:1fr 1fr; }
-  .ct { padding:16px 24px 12px; }
+  .ct { padding:40px 28px 36px; }
+  .fn { left:28px; right:28px; }
 }
 @media (max-width:600px) {
   .grid3 { grid-template-columns:1fr; }
   .ct-title { font-size:clamp(18px,5.5vw,30px) !important; }
+  .ct { padding:36px 20px 32px; }
+  .fn { left:20px; right:20px; }
 }
 </style>
 </head>
@@ -186,25 +191,25 @@ html, body {
     <img src="IMG_3572.jpeg" style="width:100%;height:100%;object-fit:cover;opacity:0.3;" alt="">
     <div style="position:absolute;inset:0;background:linear-gradient(160deg,rgba(10,22,40,0.96) 40%,rgba(0,87,255,0.2) 100%);"></div>
   </div>
-  <div style="position:relative;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:40px 60px;">
+  <div style="position:relative;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:32px;padding:48px 60px;">
     <!-- top bar -->
-    <div class="a" style="display:flex;align-items:center;justify-content:center;gap:10px;">
-      <div class="logo" style="width:18px;height:18px;"><span class="lr"></span><span class="lg"></span><span class="lb"></span><span class="ly"></span></div>
-      <img src="images.png" style="height:17px;filter:brightness(0) invert(1);opacity:0.85;" alt="Microsoft">
-      <span class="mono" style="font-size:11px;color:rgba(255,255,255,0.35);letter-spacing:.1em;margin-left:8px;">2026 Study Visit</span>
+    <div class="a" style="position:absolute;top:28px;left:0;right:0;display:flex;align-items:center;justify-content:center;gap:10px;">
+      <div class="logo" style="width:16px;height:16px;"><span class="lr"></span><span class="lg"></span><span class="lb"></span><span class="ly"></span></div>
+      <img src="images.png" style="height:15px;filter:brightness(0) invert(1);opacity:0.8;" alt="Microsoft">
+      <span class="mono" style="font-size:11px;color:rgba(255,255,255,0.3);letter-spacing:.1em;margin-left:6px;">2026 Study Visit</span>
     </div>
     <!-- hero -->
-    <div style="display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;">
-      <div class="a a2" style="font-size:clamp(56px,9vw,126px);font-weight:700;line-height:.9;letter-spacing:-.045em;color:#fff;">Microsoft</div>
-      <div class="a a3" style="font-size:clamp(56px,9vw,126px);font-weight:700;line-height:.9;letter-spacing:-.045em;color:#5B9BFF;margin-bottom:28px;">Netherlands</div>
-      <p class="a a4" style="font-size:clamp(15px,1.7vw,22px);color:rgba(255,255,255,0.65);max-width:520px;line-height:1.65;font-weight:400;">유럽 클라우드 인프라의 심장부 —<br>AI · 환경 · 디지털 주권까지 해부한다</p>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center;">
+      <div class="a a2" style="font-size:clamp(48px,7.5vw,104px);font-weight:700;line-height:.92;letter-spacing:-.045em;color:#fff;">Microsoft</div>
+      <div class="a a3" style="font-size:clamp(48px,7.5vw,104px);font-weight:700;line-height:.92;letter-spacing:-.045em;color:#5B9BFF;">Netherlands</div>
+      <p class="a a4" style="margin-top:20px;font-size:clamp(14px,1.5vw,19px);color:rgba(255,255,255,0.6);max-width:480px;line-height:1.7;font-weight:400;">유럽 클라우드 인프라의 심장부 —<br>AI · 환경 · 디지털 주권까지 해부한다</p>
     </div>
     <!-- bottom chips -->
-    <div class="a a5" style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;">
-      <span class="chip" style="background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.75);">☁️ Azure</span>
-      <span class="chip" style="background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.75);">🤖 AI</span>
-      <span class="chip" style="background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.75);">🌱 Sustainability</span>
-      <span class="chip" style="background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.75);">🔐 Digital Sovereignty</span>
+    <div class="a a5" style="position:absolute;bottom:28px;left:0;right:0;display:flex;gap:8px;flex-wrap:wrap;justify-content:center;">
+      <span class="chip" style="background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.7);">☁️ Azure</span>
+      <span class="chip" style="background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.7);">🤖 AI</span>
+      <span class="chip" style="background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.7);">🌱 Sustainability</span>
+      <span class="chip" style="background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.7);">🔐 Digital Sovereignty</span>
     </div>
   </div>
 </div>
@@ -218,7 +223,7 @@ html, body {
     <div class="ct-inner">
       <div class="eyebrow a">오늘의 구성</div>
       <div class="ct-title a a2">발표 <span class="blue">개요</span></div>
-      <div class="grid2 a a3" style="flex:1;">
+      <div class="grid2 a a3">
         <!-- col 1 -->
         <div style="background:var(--ink5);border-radius:var(--r);padding:18px 20px;display:flex;flex-direction:column;">
           <div class="row-item"><span class="row-num">01</span><div><div class="item-title">마이크로소프트란?</div><div class="item-body">설립 배경 · 핵심 사업 3가지</div></div></div>
@@ -260,7 +265,7 @@ html, body {
     <div class="ct-inner">
       <div class="eyebrow a">마이크로소프트 소개</div>
       <div class="ct-title a a2"><span class="blue">1975년</span>부터 세상을 바꿔온 디지털 인프라 기업</div>
-      <div class="grid2 a a3" style="flex:1;">
+      <div class="grid2 a a3">
         <!-- left: info table -->
         <div style="display:flex;flex-direction:column;gap:12px;">
           <div style="background:var(--ink5);border-radius:var(--r);padding:16px 18px;display:flex;flex-direction:column;gap:0;">
@@ -321,7 +326,7 @@ html, body {
     <div class="ct-inner">
       <div class="eyebrow a">입지 전략</div>
       <div class="ct-title a a2">유럽의 <span class="blue">디지털 고속도로</span> 위에 짓다</div>
-      <div class="grid2 a a3" style="flex:1;">
+      <div class="grid2 a a3">
         <!-- left: list -->
         <div style="display:flex;flex-direction:column;gap:8px;">
           <div class="card">
@@ -374,7 +379,7 @@ html, body {
   08 — MS Netherlands 소개
 ══════════════════════════════ -->
 <div class="slide" id="s8">
-  <div class="ct" style="padding-top:20px;">
+  <div class="ct">
     <span class="stag">03 / Company Profile</span>
     <div class="ct-inner">
       <!-- office image banner -->
@@ -382,7 +387,7 @@ html, body {
         <img src="image.png" style="width:100%;height:100%;object-fit:cover;object-position:center 30%;" alt="Microsoft Netherlands 오피스">
       </div>
       <div class="eyebrow a a2">기본 정보 &amp; 오피스 특징</div>
-      <div class="grid2 a a3" style="flex:1;">
+      <div class="grid2 a a3">
         <!-- left: basic info -->
         <div style="background:var(--ink5);border-radius:var(--r);padding:16px 18px;display:flex;flex-direction:column;gap:0;height:100%;">
           <div style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:10px;">기본 정보</div>
@@ -451,7 +456,7 @@ html, body {
     <div class="ct-inner">
       <div class="eyebrow a">핵심 사업 ① ②</div>
       <div class="ct-title a a2">클라우드 &amp; <span class="blue">AI</span></div>
-      <div class="grid2 a a3" style="flex:1;">
+      <div class="grid2 a a3">
         <!-- Cloud -->
         <div style="display:flex;flex-direction:column;gap:10px;height:100%;">
           <div style="display:flex;align-items:center;gap:10px;padding:14px 16px;background:var(--ink5);border-radius:var(--r);">
@@ -507,7 +512,7 @@ html, body {
     <div class="ct-inner">
       <div class="eyebrow a">핵심 사업 ③</div>
       <div class="ct-title a a2">🌱 환경 및 <span class="blue">지속가능성</span></div>
-      <div class="grid2 a a3" style="flex:1;">
+      <div class="grid2 a a3">
         <!-- left: 4 cards -->
         <div style="display:flex;flex-direction:column;gap:8px;">
           <p class="item-body" style="margin-bottom:4px;">"기술 기업도 환경 문제를 책임져야 한다" — 단순 친환경 기업을 넘어 <strong>다른 기업의 ESG를 돕는 플랫폼 기업</strong>으로</p>
@@ -578,7 +583,7 @@ html, body {
     <div class="ct-inner">
       <div class="eyebrow a" style="color:#C0143C;">뜨거운 현안</div>
       <div class="ct-title a a2">⚡ 전력 · 🌍 지역사회 갈등</div>
-      <div class="grid2 a a3" style="flex:1;">
+      <div class="grid2 a a3">
         <!-- 문제 1: 전력 -->
         <div class="card card-red" style="flex-direction:column;gap:10px;">
           <div style="font-size:10px;font-weight:700;letter-spacing:.15em;color:#C0143C;text-transform:uppercase;">문제 1 — 데이터센터 전력</div>
@@ -634,7 +639,7 @@ html, body {
     <div class="ct-inner">
       <div class="eyebrow a" style="color:#C0143C;">뜨거운 현안</div>
       <div class="ct-title a a2">🔐 디지털 주권 · 🤖 AI 규제</div>
-      <div class="grid2 a a3" style="flex:1;">
+      <div class="grid2 a a3">
         <!-- 문제 3: 디지털 주권 -->
         <div class="card" style="flex-direction:column;gap:10px;">
           <div style="font-size:10px;font-weight:700;letter-spacing:.15em;color:var(--ink3);text-transform:uppercase;">문제 3 — 디지털 주권</div>
@@ -695,7 +700,7 @@ html, body {
     <div class="ct-inner">
       <div class="eyebrow a">전공 연계 시사점</div>
       <div class="ct-title a a2">"우리 전공과 <span class="blue">Microsoft</span>의 연결점"</div>
-      <div class="grid3 a a3" style="flex:1;">
+      <div class="grid3 a a3">
         <!-- 컴퓨터·AI -->
         <div class="card" style="flex-direction:column;gap:10px;">
           <div style="font-size:26px;">💻</div>
@@ -744,10 +749,10 @@ html, body {
     <div class="ct-inner">
       <div class="eyebrow a">방문 전 심화 질문</div>
       <div class="ct-title a a2">현지 실무진과 나눌 <span class="blue">핵심 4가지</span></div>
-      <div class="a a3" style="flex:1;display:flex;flex-direction:column;gap:8px;">
+      <div class="a a3" style="display:flex;flex-direction:column;gap:8px;">
         <div class="card" style="align-items:center;gap:14px;">
           <span style="font-size:22px;flex-shrink:0;width:32px;text-align:center;">🤖</span>
-          <div style="flex:1;">
+          <div>
             <div class="item-title">책임 있는 AI</div>
             <div class="item-body">유럽의 엄격한 AI 규제 속에서 '안전하고 윤리적인 AI'를 위해 어떤 프로세스를 준비하고 있나요?</div>
           </div>
@@ -755,7 +760,7 @@ html, body {
         </div>
         <div class="card" style="align-items:center;gap:14px;">
           <span style="font-size:22px;flex-shrink:0;width:32px;text-align:center;">⚡</span>
-          <div style="flex:1;">
+          <div>
             <div class="item-title">환경 문제</div>
             <div class="item-body">전력 소비가 높은 AI 데이터센터의 전기 및 열 문제를 해결하기 위해 현지에서 도입 중인 친환경 기술은?</div>
           </div>
@@ -763,7 +768,7 @@ html, body {
         </div>
         <div class="card" style="align-items:center;gap:14px;">
           <span style="font-size:22px;flex-shrink:0;width:32px;text-align:center;">🌍</span>
-          <div style="flex:1;">
+          <div>
             <div class="item-title">글로벌 기술 이슈</div>
             <div class="item-body">EU 국가들이 강조하는 '디지털 주권'과 Microsoft의 글로벌 데이터 관리 정책은 어떻게 조화를 이루고 있나요?</div>
           </div>
@@ -771,7 +776,7 @@ html, body {
         </div>
         <div class="card" style="align-items:center;gap:14px;">
           <span style="font-size:22px;flex-shrink:0;width:32px;text-align:center;">🎓</span>
-          <div style="flex:1;">
+          <div>
             <div class="item-title">진로 탐색</div>
             <div class="item-body">인재 채용 시 중요하게 평가하는 역량은? IT 비전공자가 지사 내에서 가질 수 있는 독보적인 경쟁력은 무엇인가요?</div>
           </div>
@@ -792,7 +797,7 @@ html, body {
     <div class="ct-inner">
       <div class="eyebrow a">팀 역량 · 결론</div>
       <div class="ct-title a a2">팀이 보여준 <span class="blue">3가지 역량</span> &amp; 결론</div>
-      <div class="grid2 a a3" style="flex:1;">
+      <div class="grid2 a a3">
         <!-- left: team capability -->
         <div style="display:flex;flex-direction:column;gap:10px;">
           <div class="card">
